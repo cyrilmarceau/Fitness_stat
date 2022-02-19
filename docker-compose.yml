@@ -1,0 +1,9 @@
+# Create a .env file and set mode
+# MODE=production | development
+version: '3.8'
+services:
+    rabbit:
+        image: rabbitmq:latest
+    api:
+        depends_on:
+            - rabbit

@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+    mailhog:
+        restart: unless-stopped
+        image: mailhog/mailhog
+        ports:
+            - '9014:8025'
+    database:
+        restart: always
+        image: mariadb:10.4-focal
+        environment:
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        ports:
+            - 3386:3306
+    api:
+        image: ${STACK_NAME}_api
+        build:
+            context: .
+            dockerfile: api/Dockerfile-dev
+            args:
+                - 'DJANGO_MODE=development'
+        volumes:
+            - ./api:/code
+            - ./common:/common
+        environment:
+            - DJANGO_MODE=development
+            - DB_NAME=${DB_USERNAME}
+            - DB_USER=${DB_DATABASE}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=database
+            - DB_PORT=3306
+        ports:
+            - 9010:80
+        depends_on:
+            - database

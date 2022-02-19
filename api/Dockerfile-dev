@@ -1,0 +1,14 @@
+FROM python:3.9
+
+ENV PYTHONUNBUFFERED=1
+RUN mkdir -p /code
+
+COPY ./api/ /code/
+
+WORKDIR /code
+
+COPY ./api/requirements.txt /code/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# RUN chmod +x /code/entrypoint.dev.sh
+# entrypoint "/code/entrypoint.dev.sh"
