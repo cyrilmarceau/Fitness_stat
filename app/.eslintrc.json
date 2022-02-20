@@ -1,0 +1,25 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "prettier", "react-native", "simple-import-sort"],
+    "extends": [
+      "eslint-config-prettier",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "jsx": true,
+      "project": "./tsconfig.json"
+  },
+    "rules": {
+      "prettier/prettier": "error",
+      // "@typescript-eslint/indent": ["error", 2],
+      "no-mixed-operators": "error",
+      "quotes": ["error", "double"],
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/no-explicit-any": "error"
+  }
+  }
