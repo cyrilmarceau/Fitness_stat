@@ -4,6 +4,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Colors } from "react-native-ui-lib";
 import AuthTab from "./src/components/navigations/tabs/AuthTab";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Provider } from "react-redux";
+import { store } from "@redux/store";
 
 export default function App() {
     Colors.loadColors({
@@ -17,18 +19,20 @@ export default function App() {
     const Stack = createStackNavigator();
 
     return (
-        <SafeAreaProvider>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Group>
-                        <Stack.Screen
-                            options={{ headerShown: false }}
-                            name="Auth"
-                            component={AuthTab}
-                        />
-                    </Stack.Group>
-                </Stack.Navigator>
-            </NavigationContainer>
-        </SafeAreaProvider>
+        <Provider store={store}>
+            <SafeAreaProvider>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        <Stack.Group>
+                            <Stack.Screen
+                                options={{ headerShown: false }}
+                                name="Auth"
+                                component={AuthTab}
+                            />
+                        </Stack.Group>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </SafeAreaProvider>
+        </Provider>
     );
 }

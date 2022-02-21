@@ -2,11 +2,13 @@
     {
         "name": "email",
         "placeholder": "Email",
-        "type": "text"
+        "type": "text",
+        "defaultValue": "cyril@gmail.com"
     },
     {
         "name": "password",
         "placeholder": "Mot de passe",
-        "type": "password"
+        "type": "password",
+        "defaultValue": "CyrilCyril"
     }
 ]

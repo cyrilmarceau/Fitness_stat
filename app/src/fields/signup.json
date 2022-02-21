@@ -2,32 +2,32 @@
     {
         "name": "firstname",
         "placeholder": "Prénom",
-        "type": "text"
+        "type": "text",
+        "defaultValue": "Cyril"
     },
     {
         "name": "lastname",
         "placeholder": "Nom",
-        "type": "text"
+        "type": "text",
+        "defaultValue": "Marceau"
     },
     {
         "name": "email",
         "placeholder": "Email",
-        "type": "text"
+        "type": "text",
+        "defaultValue": "cyril@gmail.com"
     },
     {
         "name": "phone",
         "placeholder": "Numéro de téléphone",
-        "type": "text"
+        "type": "text",
+        "defaultValue": "0102030405"
     },
 
     {   
         "name": "password",
         "placeholder": "Mot de passe",
-        "type": "password"
-    },
-    {   
-        "name": "passwordVerify",
-        "placeholder": "Vérification du mot de passe",
-        "type": "password"
+        "type": "password",
+        "defaultValue": "CyrilCyril"
     }
 ]

@@ -1,11 +1,18 @@
 import { IFieldList } from "@utils/interfaces";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Colors, Incubator, Text } from "react-native-ui-lib";
+import _ from "lodash";
 
 const InputTextForm = ({ field }: { field: IFieldList }) => {
     const { TextField } = Incubator;
-    const { control } = useFormContext();
+    const { control, setValue } = useFormContext();
+
+    useEffect(() => {
+        if (_.has(field, "defaultValue")) {
+            setValue(field.name, field.defaultValue);
+        }
+    }, []);
 
     return (
         <Controller
@@ -14,8 +21,8 @@ const InputTextForm = ({ field }: { field: IFieldList }) => {
             render={({ field: { onChange, onBlur }, formState: { errors, isSubmitted } }) => (
                 <>
                     <TextField
-                        placeholder={field.placeholder}
                         floatingPlaceholder={field?.placeholder ? true : false}
+                        floatingPlaceholderColor={Colors.primary}
                         onChangeText={onChange}
                         onBlur={onBlur}
                         fieldStyle={{
@@ -23,10 +30,10 @@ const InputTextForm = ({ field }: { field: IFieldList }) => {
                             borderBottomColor: Colors.primary,
                             paddingVertical: 5,
                         }}
-                        floatingPlaceholderColor={Colors.primary}
                         enableErrors
                         floatOnFocus
                         showCharCounter
+                        {...field}
                     />
                     {isSubmitted && errors?.[field.name] && (
                         <Text error>{errors?.[field.name]?.message}</Text>

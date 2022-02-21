@@ -22,7 +22,9 @@
       "@navigations/*": ["src/components/navigations/*"],
       "@fields/*": ["./src/fields/*"],
       "@utils/*": ["./src/utils/*"],
-      "@views-auth/*": ["./src//views/auth/*"]
+      "@views-auth/*": ["./src/views/auth/*"],
+      "@api/*": ["./src/api/*"],
+      "@redux/*": ["src/redux/*"],
     }
   },
   "exclude": [

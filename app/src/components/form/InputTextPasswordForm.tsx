@@ -1,11 +1,18 @@
 import { IFieldList } from "@utils/interfaces";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Colors, Incubator, Text } from "react-native-ui-lib";
+import _ from "lodash";
 
 const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
     const { TextField } = Incubator;
-    const { control } = useFormContext();
+    const { control, setValue } = useFormContext();
+
+    useEffect(() => {
+        if (_.has(field, "defaultValue")) {
+            setValue(field.name, field.defaultValue);
+        }
+    }, []);
 
     return (
         <Controller
@@ -14,7 +21,6 @@ const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
             render={({ field: { onChange, onBlur }, formState: { errors, isSubmitted } }) => (
                 <>
                     <TextField
-                        placeholder={field.placeholder}
                         floatingPlaceholder={field?.placeholder ? true : false}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -28,6 +34,7 @@ const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
                         enableErrors
                         floatOnFocus
                         showCharCounter
+                        {...field}
                     />
 
                     {isSubmitted && errors?.[field.name] && (

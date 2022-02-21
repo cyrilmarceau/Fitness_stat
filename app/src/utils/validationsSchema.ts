@@ -21,10 +21,17 @@ const signupValidationSchema = Yup.object().shape({
     password: Yup.string()
         .required("Le champs mot de passe est requis")
         .min(8, "Le mot de passe est trop court. 8 caractères minimum"),
-    passwordVerify: Yup.string().oneOf(
-        [Yup.ref("password"), null],
-        "Le mot de passe n'est pas indentiques"
-    ),
 });
 
 export { loginValidationSchema, signupValidationSchema };
+
+// passwordVerify: Yup.string().oneOf(
+//     [Yup.ref("password"), null],
+//     "Le mot de passe n'est pas indentiques"
+// ),
+// {
+//     "name": "passwordVerify",
+//     "placeholder": "Vérification du mot de passe",
+//     "type": "password",
+//     "defaultValue": "CyrilCyril"
+// }
