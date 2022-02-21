@@ -28,6 +28,11 @@ DEBUG = True if os.getenv('DJANGO_MODE') == "development" else False
 
 ALLOWED_HOSTS = [
     '0.0.0.0',
+    '192.168.1.29'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'exp://192.168.1.29:19000', #Local
 ]
 
 
@@ -40,7 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'rest_framework',
+    'rest_framework.authtoken',
+    # Auth
+    'djoser',
 
     'core.apps.CoreConfig',
     'public',
@@ -92,6 +101,18 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user': 'app_api.serializers.UserSerializer',
+    },
 }
 
 # Password validation
@@ -174,3 +195,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'core.User'
