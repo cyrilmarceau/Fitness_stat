@@ -1,20 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { IFormsignupInputs } from "@utils/interfaces";
 import API from "@api/apiFactory";
-
-interface IState {
-    isError: boolean;
-    isSuccess: boolean;
-    isFetching: boolean;
-    errorMessage?: string;
-    errorCode?: string;
-}
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IFormsignupInputs } from "@utils/interfaces";
+import { AxiosError } from "axios";
 
 interface ISuccessSignup {
-    data: {
-        success: boolean;
-        email: string;
-    };
+    success: boolean;
+    email: string;
 }
 
 interface IErrorSignup {
@@ -24,25 +15,40 @@ interface IErrorSignup {
 
 type SuccessOrError = ISuccessSignup | IErrorSignup;
 
-export const signupUser = createAsyncThunk<SuccessOrError, IFormsignupInputs>(
-    "auth/signupUser",
-    async (credentials: IFormsignupInputs, thunkAPI): Promise<SuccessOrError> => {
-        try {
-            const response: SuccessOrError = await API.createUser(credentials);
-            console.log("response", response);
-            return response.data;
-        } catch (e: unknown) {
-            const errors = thunkAPI.rejectWithValue(e.response.data);
-            return errors;
+export const signupUser = createAsyncThunk<
+    SuccessOrError,
+    IFormsignupInputs,
+    { rejectValue: IErrorSignup }
+>("auth/signupUser", async (credentials: IFormsignupInputs, { rejectWithValue }) => {
+    try {
+        const response = await API.createUser<IFormsignupInputs, SuccessOrError>(credentials);
+        console.log("response", response);
+        return response;
+    } catch (err: AxiosError<IErrorSignup>) {
+        // The variable type annotation of the catch clause must be 'any' or 'unknown' if inserted.
+        const error: AxiosError<IErrorSignup> = err;
+        if (!error.response) {
+            throw err;
         }
+        return rejectWithValue(error.response.data);
     }
-);
+});
+
+interface IState {
+    isError: boolean;
+    isSuccess: boolean;
+    isFetching: boolean;
+    errorResponse?: IErrorSignup;
+}
 
 const initialState = {
     isFetching: false,
     isSuccess: false,
     isError: false,
-    errorMessage: "",
+    errorResponse: {
+        message: "",
+        code: "",
+    },
 } as IState;
 
 export const authSlice = createSlice({
@@ -61,15 +67,14 @@ export const authSlice = createSlice({
         builder.addCase(signupUser.pending, (state: IState) => {
             state.isFetching = true;
         });
-        builder.addCase(signupUser.fulfilled, (state: IState, action) => {
+        builder.addCase(signupUser.fulfilled, (state: IState) => {
             state.isFetching = false;
             state.isSuccess = true;
-            console.log("fulfilled", action);
         });
         builder.addCase(signupUser.rejected, (state: IState, action) => {
             state.isFetching = false;
             state.isError = true;
-            console.log("action", action.payload);
+            console.log("signupUser.rejected >>>> action", action.payload);
         });
     },
 });
