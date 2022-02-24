@@ -6,39 +6,23 @@ from core.models import User
 
 logger = logging.getLogger(__name__)
 
-class UserSerializer(serializers.BaseSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    """Serializers for users"""
 
-    def to_internal_value(self, data):
-        email = data.get('email')
-
-        duplicate_users = User.objects.filter(email=email)
-
-        if not email:
-            raise serializers.ValidationError({
-                'error': {
-                    'message': 'Field email missing for create user',
-                    'code': 'field_missing'
-                }
-            })
-
-        if duplicate_users.exists():
-            raise serializers.ValidationError({
-                'error': {
-                    'message': 'User already exist',
-                    'code': 'unique_user'
-                }
-            })
-
-        return {
-            'email': email,
-           
-        }
-
-    def to_representation(self, instance):
-        return {
-            'email': instance.email,
-            'success': True
+    class Meta:
+        model = get_user_model()
+        fields = '__all__'
+        read_only_fields = ('id', 'last_login', 'created_at', 'updated_at',)
+        extra_kwargs = {
+            'password': {
+                'write_only': True,
+                'min_length': 8,
+                'style': {'input_type': 'password'}
+            },
         }
 
     def create(self, validated_data):
-        return get_user_model().objects.create_user(**validated_data)
+        """Create and return a new user"""
+        user = get_user_model().objects.create_user(**validated_data)
+
+        return user
