@@ -2,6 +2,7 @@ import API from "@api/apiFactory";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IFormsignupInputs } from "@utils/interfaces";
 import { AxiosError } from "axios";
+import { _18n } from "@utils/i18n";
 
 interface ISuccessSignup {
     success: boolean;
@@ -9,8 +10,10 @@ interface ISuccessSignup {
 }
 
 interface IErrorSignup {
-    message: string;
-    code: string;
+    key: {
+        message: string;
+        code: string;
+    };
 }
 
 type SuccessOrError = ISuccessSignup | IErrorSignup;
@@ -25,7 +28,6 @@ export const signupUser = createAsyncThunk<
         console.log("response", response);
         return response;
     } catch (err: AxiosError<IErrorSignup>) {
-        // The variable type annotation of the catch clause must be 'any' or 'unknown' if inserted.
         const error: AxiosError<IErrorSignup> = err;
         if (!error.response) {
             throw err;
@@ -38,17 +40,16 @@ interface IState {
     isError: boolean;
     isSuccess: boolean;
     isFetching: boolean;
-    errorResponse?: IErrorSignup;
+    message: string;
+    code: string;
 }
 
 const initialState = {
     isFetching: false,
     isSuccess: false,
     isError: false,
-    errorResponse: {
-        message: "",
-        code: "",
-    },
+    message: "",
+    code: "",
 } as IState;
 
 export const authSlice = createSlice({
@@ -59,6 +60,7 @@ export const authSlice = createSlice({
             state.isError = false;
             state.isSuccess = false;
             state.isFetching = false;
+            state.message = "";
 
             return state;
         },
@@ -74,7 +76,11 @@ export const authSlice = createSlice({
         builder.addCase(signupUser.rejected, (state: IState, action) => {
             state.isFetching = false;
             state.isError = true;
-            console.log("signupUser.rejected >>>> action", action.payload);
+
+            const result = JSON.parse(action.payload);
+
+            const translationErrorMessage: string = _18n("signup", result.email[0].code);
+            state.message = translationErrorMessage;
         });
     },
 });

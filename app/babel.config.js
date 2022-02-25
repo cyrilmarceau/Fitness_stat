@@ -24,6 +24,7 @@ module.exports = function (api) {
                         "@views-auth": "./src/views/auth",
                         "@api": "./src/api",
                         "@redux": "./src/redux",
+                        "@i18n": "./src/i18n",
                     },
                 },
             ],

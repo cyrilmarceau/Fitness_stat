@@ -7,7 +7,7 @@ import type { AppDispatch, RootState } from "@redux/store";
 import { BUTTON_MARGIN } from "@utils/constants";
 import { IFormsignupInputs } from "@utils/interfaces";
 import { signupValidationSchema } from "@utils/validationsSchema";
-import React, { useState } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, Colors, Incubator, LoaderScreen } from "react-native-ui-lib";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,27 +18,16 @@ export const SignupScreen: React.FC = () => {
 
     const methods = useForm<IFormsignupInputs>(formOptions);
 
-    const { isFetching, isError, isSuccess } = useSelector((state: RootState) => state.auth);
+    const { isFetching, isError, isSuccess, message } = useSelector(
+        (state: RootState) => state.auth
+    );
     const dispatch = useDispatch<AppDispatch>();
 
-    const [visibleToast, setVisibleToast] = useState<boolean>(false);
-
     const onSubmit = (data: IFormsignupInputs) => {
-        /**
-         * Todo:
-         * Afficher Toast en success si l'utilisateur est bien crée
-         */
         dispatch(signupUser(data));
     };
 
-    // const onError = (errors: unknown) => {
-    //     if (errors) {
-    //         setError(true);
-    //         setVisibleToast(true);
-    //     }
-    // };
-
-    console.log("component render", isError);
+    console.log("component render", message);
     return (
         <BaseLayout>
             {isFetching ? (
@@ -58,16 +47,15 @@ export const SignupScreen: React.FC = () => {
                     </FormProvider>
                     {isError && (
                         <Toast
-                            message="Il y a une erreur lors de l'inscription"
-                            visible={visibleToast}
+                            message={isSuccess ? "Inscription réussie" : message}
+                            visible={isError || isSuccess ? true : false}
                             position={"top"}
                             swipeable={true}
                             autoDismiss={5000}
                             zIndex={2}
-                            preset="failure"
+                            preset={isSuccess ? "success" : "failure"}
                             containerStyle={{ top: 0 }}
                             centerMessage
-                            onDismiss={() => setVisibleToast(!visibleToast)}
                         />
                     )}
                 </>

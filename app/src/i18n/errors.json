@@ -1,0 +1,9 @@
+{
+    "signup": {
+        "unique": "Cette adresse email existe déjà. Veuillez la changer"
+    },
+    "login": {
+        "bad_formated": "Email mal formaté",
+        "invalid_credential": "Email ou mot de passe incorrect"
+    } 
+}
