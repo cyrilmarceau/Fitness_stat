@@ -5,7 +5,7 @@ import { View } from "react-native-ui-lib";
 
 const BaseLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
             <StatusBar style="dark" />
             <View paddingH-30>{children}</View>
         </SafeAreaView>
