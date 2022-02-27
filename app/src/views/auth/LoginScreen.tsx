@@ -1,20 +1,16 @@
-import loginFieldsJSON from "@fields/login.json";
+import loginFieldsJSON from "@utils/json/form/login.json";
 import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BaseLayout from "@layout/BaseLayout";
 import { BUTTON_MARGIN } from "@utils/constants";
-import { loginValidationSchema } from "@utils/validationsSchema";
+import { loginValidationSchema } from "@utils/validations";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, Colors, Incubator } from "react-native-ui-lib";
+import { IFormLoginInputs } from "@utils/interfaces/index";
 const { Toast } = Incubator;
 
 const LoginScreen = () => {
-    interface IFormLoginInputs {
-        email: string;
-        password: string;
-    }
-
     const formOptions = { resolver: yupResolver(loginValidationSchema) };
 
     const methods = useForm<IFormLoginInputs>(formOptions);
@@ -43,7 +39,6 @@ const LoginScreen = () => {
                     swipeable={true}
                     autoDismiss={5000}
                     zIndex={2}
-                    preset="failure"
                     containerStyle={{ top: 0 }}
                     centerMessage
                     onDismiss={() => setVisibleToast(!visibleToast)}

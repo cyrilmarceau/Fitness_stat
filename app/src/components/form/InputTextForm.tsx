@@ -1,4 +1,4 @@
-import { IFieldList } from "@utils/interfaces";
+import { IFieldList } from "@utils/interfaces/index";
 import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Colors, Incubator, Text } from "react-native-ui-lib";

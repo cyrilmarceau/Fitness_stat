@@ -24,14 +24,3 @@ const signupValidationSchema = Yup.object().shape({
 });
 
 export { loginValidationSchema, signupValidationSchema };
-
-// passwordVerify: Yup.string().oneOf(
-//     [Yup.ref("password"), null],
-//     "Le mot de passe n'est pas indentiques"
-// ),
-// {
-//     "name": "passwordVerify",
-//     "placeholder": "Vérification du mot de passe",
-//     "type": "password",
-//     "defaultValue": "CyrilCyril"
-// }

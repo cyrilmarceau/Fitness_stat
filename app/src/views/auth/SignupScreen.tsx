@@ -1,19 +1,20 @@
-import signupFieldsJSON from "@fields/signup.json";
 import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BaseLayout from "@layout/BaseLayout";
-import { signupUser } from "@redux/authSlice";
+import { clearState } from "@redux/auth/authSlice";
+import { signupUser } from "@redux/auth/index";
 import type { AppDispatch, RootState } from "@redux/store";
 import { BUTTON_MARGIN } from "@utils/constants";
 import { IFormsignupInputs } from "@utils/interfaces";
-import { signupValidationSchema } from "@utils/validationsSchema";
-import React from "react";
+import signupFieldsJSON from "@utils/json/form/signup.json";
+import { signupValidationSchema } from "@utils/validations";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, Colors, Incubator, LoaderScreen } from "react-native-ui-lib";
 import { useDispatch, useSelector } from "react-redux";
 const { Toast } = Incubator;
 
-export const SignupScreen: React.FC = () => {
+export const SignupScreen = ({ navigation }) => {
     const formOptions = { resolver: yupResolver(signupValidationSchema) };
 
     const methods = useForm<IFormsignupInputs>(formOptions);
@@ -27,7 +28,15 @@ export const SignupScreen: React.FC = () => {
         dispatch(signupUser(data));
     };
 
-    console.log("component render", message);
+    useEffect(() => {
+        if (isSuccess) {
+            setTimeout(() => {
+                dispatch(clearState());
+                navigation.navigate("Login");
+            }, 1500);
+        }
+    }, [isSuccess]);
+
     return (
         <BaseLayout>
             {isFetching ? (
@@ -53,7 +62,7 @@ export const SignupScreen: React.FC = () => {
                             swipeable={true}
                             autoDismiss={5000}
                             zIndex={2}
-                            preset={isSuccess ? "success" : "failure"}
+                            // preset={isSuccess ? "success" : "failure"}
                             containerStyle={{ top: 0 }}
                             centerMessage
                         />

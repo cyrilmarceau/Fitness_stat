@@ -1,4 +1,5 @@
-import { IFieldList, TFieldsList } from "@utils/interfaces";
+import { IFieldList } from "@utils/interfaces/index";
+import { TFieldsList } from "@utils/types";
 import React from "react";
 import { Text, View } from "react-native-ui-lib";
 import InputTextForm from "./InputTextForm";

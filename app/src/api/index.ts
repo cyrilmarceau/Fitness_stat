@@ -46,6 +46,10 @@ const that = {
     createUser<V, R>(values: V): Promise<R> {
         return that.postRoute<V, R>(`${process.env.APP_ROUTE_PRE}users/`, values);
     },
+
+    loginUser<V, R>(values: V): Promise<R> {
+        return that.postRoute<V, R>(`${process.env.APP_ROUTE_PRE}auth/token/login`, values);
+    },
 };
 
 export default that;
