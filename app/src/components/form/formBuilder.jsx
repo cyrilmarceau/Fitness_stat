@@ -1,16 +1,14 @@
-import { IFieldList } from "@utils/interfaces/index";
-import { TFieldsList } from "@utils/types";
 import React from "react";
 import { Text, View } from "react-native-ui-lib";
 import InputTextForm from "./InputTextForm";
 import InputTextPasswordForm from "./InputTextPasswordForm";
 
-const FormBuilder = ({ fieldsList }: { fieldsList: TFieldsList }) => {
+const FormBuilder = ({ fieldsList }) => {
     return (
         <View>
             {fieldsList.length > 0 &&
-                fieldsList.map((fl: IFieldList, i: number) => {
-                    let render: React.ReactNode = "";
+                fieldsList.map((fl, i) => {
+                    let render = "";
 
                     switch (fl.type) {
                         case "text":

@@ -3,7 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View } from "react-native-ui-lib";
 
-const BaseLayout = ({ children }: { children: React.ReactNode }) => {
+const BaseLayout = ({ children }) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <StatusBar style="dark" />

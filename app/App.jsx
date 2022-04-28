@@ -2,10 +2,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Colors } from "react-native-ui-lib";
-import AuthTab from "./src/components/navigations/tabs/AuthTab";
+
 import { createStackNavigator } from "@react-navigation/stack";
-import { Provider } from "react-redux";
-import { store } from "@redux/store";
+import { AuthProvider } from "@contexts/authContext";
+import DispatcherNav from "@layout-navigations/DispatcherNav";
 
 export default function App() {
     Colors.loadColors({
@@ -19,20 +19,20 @@ export default function App() {
     const Stack = createStackNavigator();
 
     return (
-        <Provider store={store}>
+        <AuthProvider>
             <SafeAreaProvider>
                 <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Group>
                             <Stack.Screen
                                 options={{ headerShown: false }}
-                                name="Auth"
-                                component={AuthTab}
+                                name="Dispatcher"
+                                component={DispatcherNav}
                             />
                         </Stack.Group>
                     </Stack.Navigator>
                 </NavigationContainer>
             </SafeAreaProvider>
-        </Provider>
+        </AuthProvider>
     );
 }

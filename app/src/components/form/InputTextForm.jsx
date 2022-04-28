@@ -1,10 +1,9 @@
-import { IFieldList } from "@utils/interfaces/index";
 import React, { useEffect } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Colors, Incubator, Text } from "react-native-ui-lib";
 import _ from "lodash";
 
-const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
+const InputTextForm = ({ field }) => {
     const { TextField } = Incubator;
     const { control, setValue } = useFormContext();
 
@@ -22,21 +21,19 @@ const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
                 <>
                     <TextField
                         floatingPlaceholder={field?.placeholder ? true : false}
+                        floatingPlaceholderColor={Colors.primary}
                         onChangeText={onChange}
                         onBlur={onBlur}
                         fieldStyle={{
                             borderBottomWidth: 1,
-                            borderBottomColor:
-                                isSubmitted && errors?.[field.name] ? Colors.error : Colors.primary,
+                            borderBottomColor: Colors.primary,
                             paddingVertical: 5,
                         }}
-                        floatingPlaceholderColor={Colors.primary}
                         enableErrors
                         floatOnFocus
                         showCharCounter
                         {...field}
                     />
-
                     {isSubmitted && errors?.[field.name] && (
                         <Text error>{errors?.[field.name]?.message}</Text>
                     )}
@@ -46,4 +43,4 @@ const InputTextPasswordForm = ({ field }: { field: IFieldList }) => {
     );
 };
 
-export default InputTextPasswordForm;
+export default InputTextForm;
