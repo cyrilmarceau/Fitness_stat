@@ -11,4 +11,4 @@ COPY ./api/requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN chmod +x /code/entrypoint.dev.sh
-entrypoint "/code/entrypoint.dev.sh"
+ENTRYPOINT "/code/entrypoint.dev.sh"

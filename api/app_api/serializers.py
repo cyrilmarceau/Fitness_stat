@@ -1,12 +1,21 @@
 import logging
+import json
+
+from dj_rest_auth.serializers import UserDetailsSerializer, LoginSerializer
 
 from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+from django.utils.encoding import force_str
 from core.models import User
+
+from .errors import DetailsResponse, SuccessValue, ErrorResponse
 
 logger = logging.getLogger(__name__)
 
-class UserSerializer(serializers.ModelSerializer):
+
+class UserSerializerTest(serializers.ModelSerializer):
     """Serializers for users"""
 
     class Meta:
@@ -24,5 +33,29 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create and return a new user"""
         user = get_user_model().objects.create_user(**validated_data)
-
         return user
+
+
+class CustomUserDetailsSerializer(UserDetailsSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'firstname', 'lastname', 'email', 'phone', 'is_active', 'created_at', 'updated_at',)
+
+
+# class CustomLoginSerializer(LoginSerializer):
+#
+#     def validate(self, attrs):
+#         try:
+#             # Override validate method from LoginSerializer
+#             res = super().validate(attrs)
+#         except ValidationError as e:
+#             error = {
+#                 'result': ErrorResponse(
+#                     SuccessValue.ERROR,
+#                     DetailsResponse(full_details=e.get_full_details(), status_code=e.status_code).to_json()
+#                 ).to_json()
+#             }
+#             raise serializers.ValidationError(error)
+#             raise res
+#         else:
+#             return res

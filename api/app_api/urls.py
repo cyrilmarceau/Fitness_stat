@@ -1,11 +1,17 @@
 from django.urls import path, include
 from rest_framework import routers
 from app_api import views
+from jwt import utils
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
+router.register('users', views.UserViewSet, basename='User')
 
 urlpatterns = [
     # Crud
     path('', include(router.urls)),
+    path('auth/', include('dj_rest_auth.urls'))
 ]
