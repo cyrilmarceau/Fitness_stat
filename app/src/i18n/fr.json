@@ -13,5 +13,10 @@
     "verifyToken": {
         "token_not_valid": "Connexion automatique impossible, veuillez vous reconnecter",
         "impossible_verify_token": "Connexion automatique impossible, veuillez vous reconnecter"
+    },
+    "route": {
+        "Home": "Accueil",
+        "Meal": "Repas",
+        "Workout": "Entrainement"
     }
 }

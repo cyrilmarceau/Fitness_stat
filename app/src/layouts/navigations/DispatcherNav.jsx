@@ -7,7 +7,9 @@ import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
 import React, { useState, useEffect } from "react";
 import { removeKeysLS, getLS } from "@helpers";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MyAccountScreen from "@views-app/MyAccountScreen";
+import SettingsScreen from "@views-app/SettingsScreen";
 const DispatcherNav = () => {
     const auth = useAuth();
     const Stack = createStackNavigator();
@@ -16,7 +18,7 @@ const DispatcherNav = () => {
 
     const verifyTokenInvalidOrExpired = async () => {
         const { success, error, message } = await auth.verifyToken();
-        console.log(success, error);
+
         // Check token validation and remove localStorage if token is invalid or expired
         if (!success && error) {
             setErrorMessage(message);
@@ -38,12 +40,9 @@ const DispatcherNav = () => {
 
     useEffect(async () => {
         const isInvalidOrExpired = await verifyTokenInvalidOrExpired();
-        console.log("isInvalidOrExpired", isInvalidOrExpired);
         if (isInvalidOrExpired) {
-            console.log("---- INVALID ----");
             return;
         } else {
-            console.log("---- AUTOMATIC ----");
             await automaticConnexion();
         }
     }, []);
@@ -54,9 +53,15 @@ const DispatcherNav = () => {
                 <Stack.Screen options={{ headerShown: false }} name="Auth" component={AuthTab} />
             );
         } else {
-            return <Stack.Screen name="App" component={AppTab} />;
+            return (
+                <>
+                    <Stack.Screen options={{ headerShown: false }} name="App" component={AppTab} />
+                </>
+            );
         }
     };
+
+    const Drawer = createDrawerNavigator();
 
     return (
         <>

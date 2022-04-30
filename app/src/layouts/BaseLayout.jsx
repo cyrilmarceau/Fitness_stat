@@ -1,15 +1,26 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View } from "react-native-ui-lib";
+import { View, Colors } from "react-native-ui-lib";
+import { StyleSheet } from "react-native";
 
-const BaseLayout = ({ children }) => {
+const LayoutView = ({ children }) => {
+    return <View paddingH-20>{children}</View>;
+};
+
+const BaseLayout = ({ children, enablePadding }) => {
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView edges={["right", "left"]} style={[styles.background, { flex: 1 }]}>
             <StatusBar style="dark" />
-            <View paddingH-30>{children}</View>
+            <View style={enablePadding ?? { paddingHorizontal: 20 }}>{children}</View>
         </SafeAreaView>
     );
 };
 
-export default BaseLayout;
+const styles = StyleSheet.create({
+    background: {
+        backgroundColor: Colors.background,
+    },
+});
+
+export { BaseLayout, LayoutView };

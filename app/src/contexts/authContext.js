@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }) => {
 
                 // Save refresh_token for automatic connection
                 setKeyLS("refreshToken", res.refresh_token);
-                console.log("login refresh token --", res.refresh_token);
                 setMember(res.user);
                 return nonError;
             }
@@ -112,7 +111,6 @@ export const AuthProvider = ({ children }) => {
     const refreshToken = async () => {
         try {
             const refreshTokenLS = await getLS("refreshToken");
-            console.log("--- refreshTokenLS--- ", refreshTokenLS);
             if (!_.isNil(refreshTokenLS)) {
                 const request = { refresh: refreshTokenLS };
 

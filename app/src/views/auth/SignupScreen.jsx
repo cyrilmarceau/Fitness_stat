@@ -2,7 +2,7 @@ import { BUTTON_MARGIN } from "@constants";
 import signupFieldsJSON from "@fields/signup.json";
 import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
-import BaseLayout from "@layout/BaseLayout";
+import { BaseLayout } from "@layout/BaseLayout";
 import { signupValidationSchema } from "@validations";
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";

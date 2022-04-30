@@ -3,7 +3,7 @@ import { useAuth } from "@contexts/authContext";
 import loginFieldsJSON from "@fields/login.json";
 import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
-import BaseLayout from "@layout/BaseLayout";
+import { BaseLayout } from "@layout/BaseLayout";
 import { loginValidationSchema } from "@validations";
 import _ from "lodash";
 import React, { useEffect, useState } from "react";

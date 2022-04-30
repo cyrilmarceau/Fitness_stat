@@ -20,7 +20,7 @@ const AuthTab = () => {
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: Colors.primary,
-                tabBarInactiveTintColor: Colors.primaryExtraLight,
+                tabBarInactiveTintColor: Colors.background,
             }}
         >
             <Tab.Screen

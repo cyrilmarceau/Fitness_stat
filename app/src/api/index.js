@@ -1,7 +1,7 @@
 import axios from "axios";
 import _ from "lodash";
-import { getLS } from "@helpers";
 
+// Ecole: http://192.168.20.214:9010/
 const PUBLIC_API_URL = "http://192.168.1.29:9010/";
 const APP_ROUTE = "api/app/";
 
@@ -12,8 +12,6 @@ const that = {
             "Accept": "Application/json",
         };
 
-        // if (autenticatedRoute === true) {
-        // }
         return axios.create({
             baseURL: PUBLIC_API_URL,
             headers: reqHeaders,
@@ -61,6 +59,9 @@ const that = {
     },
     me() {
         return that.getRoute(`${APP_ROUTE}auth/user/`, {}, true);
+    },
+    getMuscles() {
+        return that.getRoute(`${APP_ROUTE}muscles/`, {}, true);
     },
 };
 
