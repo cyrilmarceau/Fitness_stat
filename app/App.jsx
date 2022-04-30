@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Colors, Typography } from "react-native-ui-lib";
-
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AuthProvider } from "@contexts/authContext";
 import DispatcherNav from "@layout-navigations/DispatcherNav";
@@ -55,7 +55,6 @@ export default function App() {
     }
 
     const Stack = createStackNavigator();
-
     return (
         <AuthProvider>
             <SafeAreaProvider>

@@ -7,6 +7,8 @@ import HomeScreen from "@views-app/HomeScreen";
 import WorkoutScreen from "@views-app/WorkoutScreen";
 import MealScreen from "@views-app/MealScreen";
 import CustomTabBar from "./CustomTabBar";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import { _i18n } from "@helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -37,6 +39,7 @@ const AppTab = ({ navigation }) => {
             />
         ),
     };
+    const Drawer = createDrawerNavigator();
     return (
         <Tab.Navigator
             initialRouteName="Home"

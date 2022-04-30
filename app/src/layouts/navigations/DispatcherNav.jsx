@@ -1,18 +1,15 @@
 import { useAuth } from "@contexts/authContext";
-import AppTab from "@layout-navigations/tabs/AppTab";
-import AuthTab from "@layout-navigations/tabs/AuthTab";
-import { createStackNavigator } from "@react-navigation/stack";
+import { removeKeysLS } from "@helpers";
+import AuthStack from "@layout-navigations/stacks/AuthStack";
+import RootStack from "@layout-navigations/stacks/RootStack";
 import _ from "lodash";
+import React, { useEffect, useState } from "react";
 import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
-import React, { useState, useEffect } from "react";
-import { removeKeysLS, getLS } from "@helpers";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import MyAccountScreen from "@views-app/MyAccountScreen";
-import SettingsScreen from "@views-app/SettingsScreen";
+
 const DispatcherNav = () => {
     const auth = useAuth();
-    const Stack = createStackNavigator();
+
     const [errMessage, setErrorMessage] = useState("");
     const [err, setErr] = useState(null);
 
@@ -47,24 +44,9 @@ const DispatcherNav = () => {
         }
     }, []);
 
-    const renderStack = () => {
-        if (_.isNil(auth.member)) {
-            return (
-                <Stack.Screen options={{ headerShown: false }} name="Auth" component={AuthTab} />
-            );
-        } else {
-            return (
-                <>
-                    <Stack.Screen options={{ headerShown: false }} name="App" component={AppTab} />
-                </>
-            );
-        }
-    };
-
-    const Drawer = createDrawerNavigator();
-
     return (
         <>
+            {_.isNil(auth.member) ? <AuthStack /> : <RootStack />}
             {err && (
                 <Toast
                     message={errMessage}
@@ -81,7 +63,6 @@ const DispatcherNav = () => {
                     }}
                 />
             )}
-            <Stack.Navigator>{renderStack()}</Stack.Navigator>
         </>
     );
 };
