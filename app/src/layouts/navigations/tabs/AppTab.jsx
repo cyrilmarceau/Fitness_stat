@@ -1,16 +1,15 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import React from "react";
-import { DrawerActions } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
-import { Colors, Button, Avatar } from "react-native-ui-lib";
-import HomeScreen from "@views-app/HomeScreen";
-import WorkoutScreen from "@views-app/WorkoutScreen";
-import MealScreen from "@views-app/MealScreen";
-import CustomTabBar from "./CustomTabBar";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-
-import { _i18n } from "@helpers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { _i18n } from "@helpers";
+import MealStack from "@layout-navigations/stacks/app/MealStack";
+import DrawerStack from "@layout-navigations/stacks/app/DrawerStack";
+import WorkoutStack from "@layout-navigations/stacks/app/WorkoutStack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { DrawerActions } from "@react-navigation/native";
+import HomeScreen from "@views-app/HomeScreen";
+import { BlurView } from "expo-blur";
+import React from "react";
+import { Avatar, Colors } from "react-native-ui-lib";
+import CustomTabBar from "./CustomTabBar";
 
 const AppTab = ({ navigation }) => {
     const Tab = createBottomTabNavigator();
@@ -39,7 +38,7 @@ const AppTab = ({ navigation }) => {
             />
         ),
     };
-    const Drawer = createDrawerNavigator();
+
     return (
         <Tab.Navigator
             initialRouteName="Home"
@@ -62,26 +61,27 @@ const AppTab = ({ navigation }) => {
                 title: route?.name ? _i18n("route", route.name) : "",
                 tabBarActiveTintColor: Colors.primary,
                 tabBarInactiveTintColor: Colors.background,
+                ...headerProps,
             })}
         >
+            <Tab.Screen name="DrawerStack" component={DrawerStack} />
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
                 options={({ route }) => ({
                     tabBarLabel: "Accueil",
-                    ...headerProps,
                 })}
             />
             <Tab.Screen
-                name="Workout"
-                component={WorkoutScreen}
+                name="WorkoutStack"
+                component={WorkoutStack}
                 options={{
                     tabBarLabel: "Entrainements",
                 }}
             />
             <Tab.Screen
-                name="Meal"
-                component={MealScreen}
+                name="MealStack"
+                component={MealStack}
                 options={{
                     tabBarLabel: "Repas",
                 }}

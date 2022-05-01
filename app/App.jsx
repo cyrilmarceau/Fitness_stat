@@ -1,21 +1,19 @@
 import "react-native-gesture-handler";
 
-import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Colors, Typography } from "react-native-ui-lib";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createStackNavigator } from "@react-navigation/stack";
 import { AuthProvider } from "@contexts/authContext";
-import DispatcherNav from "@layout-navigations/DispatcherNav";
-import AppLoading from "expo-app-loading";
 import {
-    useFonts,
     Montserrat_400Regular,
     Montserrat_500Medium,
     Montserrat_600SemiBold,
     Montserrat_700Bold,
+    useFonts,
 } from "@expo-google-fonts/montserrat";
+import DispatcherNav from "@layout-navigations/DispatcherNav";
+import { createStackNavigator } from "@react-navigation/stack";
+import AppLoading from "expo-app-loading";
+import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Colors, Typography } from "react-native-ui-lib";
 
 export default function App() {
     /* prettier-ignore */
@@ -58,17 +56,7 @@ export default function App() {
     return (
         <AuthProvider>
             <SafeAreaProvider>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        <Stack.Group>
-                            <Stack.Screen
-                                options={{ headerShown: false }}
-                                name="Dispatcher"
-                                component={DispatcherNav}
-                            />
-                        </Stack.Group>
-                    </Stack.Navigator>
-                </NavigationContainer>
+                <DispatcherNav />
             </SafeAreaProvider>
         </AuthProvider>
     );

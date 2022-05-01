@@ -3,7 +3,8 @@ import { removeKeysLS } from "@helpers";
 import AuthStack from "@layout-navigations/stacks/AuthStack";
 import RootStack from "@layout-navigations/stacks/RootStack";
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createRef } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
 
@@ -44,9 +45,15 @@ const DispatcherNav = () => {
         }
     }, []);
 
+    const navigationRef = createRef();
+    const nav = () => navigationRef.current;
+
     return (
         <>
-            {_.isNil(auth.member) ? <AuthStack /> : <RootStack />}
+            <NavigationContainer ref={navigationRef}>
+                {_.isNil(auth.member) ? <AuthStack /> : <RootStack nav={nav} />}
+            </NavigationContainer>
+
             {err && (
                 <Toast
                     message={errMessage}

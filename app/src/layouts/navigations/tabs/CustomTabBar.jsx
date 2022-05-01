@@ -16,16 +16,15 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             case "Home":
                 iconName = "home-circle-outline";
                 break;
-            case "Workout":
+            case "WorkoutStack":
                 iconName = "run";
                 break;
-            case "Meal":
+            case "MealStack":
                 iconName = "food-variant";
                 break;
             default:
                 break;
         }
-
         return <MaterialCommunityIcons name={iconName} color={color} size={24} />;
     };
 

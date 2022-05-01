@@ -1,18 +1,29 @@
-import { View, Text } from "react-native";
+import AppTab from "@layout-navigations/tabs/AppTab";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import React from "react";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import AppStack from "./AppStack";
-import MyAccountScreen from "@views-app/MyAccountScreen";
-import SettingsScreen from "@views-app/SettingsScreen";
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
 
-const RootStack = () => {
-    const Drawer = createDrawerNavigator();
+const CustomDrawerContent = (props) => {
+    console.log(props.state.routeNames);
+    const currentRouteName = props.nav()?.getCurrentRoute().name; // get focused route name
+
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen name="Home" component={AppStack} options={{ headerShown: false }} />
-            <Drawer.Screen name="Account" component={MyAccountScreen} />
-            <Drawer.Screen name="Settings" component={SettingsScreen} />
+        <DrawerContentScrollView {...props}>
+            <DrawerItem
+                label="Settings"
+                onPress={() => props.navigation.navigate("DrawerStack", { screen: "Settings" })}
+            />
+        </DrawerContentScrollView>
+    );
+};
+
+const RootStack = ({ nav }) => {
+    const Drawer = createDrawerNavigator();
+
+    return (
+        <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} nav={nav} />}>
+            <Drawer.Screen name="Stack" component={AppTab} options={{ headerShown: false }} />
         </Drawer.Navigator>
     );
 };
