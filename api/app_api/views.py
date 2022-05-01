@@ -1,16 +1,16 @@
 import logging
 
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.exceptions import APIException
-
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
 
 from .serializers import UserSerializerTest
-from core.models import User
+from core.models import User, Muscle, muscles
 
 logger = logging.getLogger(__name__)
 
@@ -31,3 +31,11 @@ class UserViewSet(viewsets.ModelViewSet):
             json_error = Response(JSONRenderer().render(errors_details), status=status.HTTP_400_BAD_REQUEST)
             return json_error
 
+
+@permission_classes([IsAuthenticated])
+class ListMuscle(APIView):
+    def get(self, request, format=None):
+        """
+        Return a list of dictionary(key, value) of all muscles.
+        """
+        return Response(muscles)

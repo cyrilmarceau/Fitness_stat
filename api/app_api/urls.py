@@ -13,5 +13,6 @@ router.register('users', views.UserViewSet, basename='User')
 urlpatterns = [
     # Crud
     path('', include(router.urls)),
-    path('auth/', include('dj_rest_auth.urls'))
+    path('auth/', include('dj_rest_auth.urls')),
+    path('muscles/', views.ListMuscle.as_view()),
 ]

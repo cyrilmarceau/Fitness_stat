@@ -1,0 +1,162 @@
+[
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "horizontal-rowing"
+  },
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "vertical-rowing"
+  },
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "dumbbell-rowing"
+  },
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "pull-up"
+  },
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "chin-up"
+  },
+  {
+    "muscle": "back",
+    "sub_category": "",
+    "slug": "barbel-rowing"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "bench-press"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "incline-bench-press"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "decline-bench-press"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "dumbell-bench-press"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "close-grip-bench-press"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "cable-crossover"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "cable-crossover"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "push-ups"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "incline-push-ups"
+  },
+  {
+    "muscle": "chest",
+    "sub_category": "",
+    "slug": "decline-push-ups"
+  },
+  {
+    "muscle": "shoulders",
+    "sub_category": "",
+    "slug": "dumbell-press"
+  },
+  {
+    "muscle": "shoulders",
+    "sub_category": "",
+    "slug": "overhead-press"
+  },
+  {
+    "muscle": "shoulders",
+    "sub_category": "",
+    "slug": "overhead-press"
+  },
+  {
+    "muscle": "shoulders",
+    "sub_category": "",
+    "slug": "front-raise"
+  },
+  {
+    "muscle": "shoulders",
+    "sub_category": "",
+    "slug": "side-raise"
+  },
+  {
+    "muscle": "biceps",
+    "sub_category": "",
+    "slug": "preacher-curl"
+  },
+  {
+    "muscle": "biceps",
+    "sub_category": "",
+    "slug": "hammer-curl"
+  },
+  {
+    "muscle": "biceps",
+    "sub_category": "",
+    "slug": "cable-curl"
+  },
+  {
+    "muscle": "biceps",
+    "sub_category": "",
+    "slug": "riverse-curl"
+  },
+  {
+    "muscle": "triceps",
+    "sub_category": "",
+    "slug": "french-press"
+  },
+  {
+    "muscle": "triceps",
+    "sub_category": "",
+    "slug": "dumbell-triceps-extension"
+  },
+  {
+    "muscle": "abs",
+    "sub_category": "",
+    "slug": "plank"
+  },
+  {
+    "muscle": "abs",
+    "sub_category": "",
+    "slug": "side-plank"
+  },
+  {
+    "muscle": "abs",
+    "sub_category": "",
+    "slug": "reverse-crunch"
+  },
+  {
+    "muscle": "abs",
+    "sub_category": "",
+    "slug": "sit-up"
+  },
+  {
+    "muscle": "abs",
+    "sub_category": "",
+    "slug": "russian-twist"
+  }
+]

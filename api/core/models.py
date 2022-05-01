@@ -1,7 +1,16 @@
+import os
+import json
+from api import settings
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+
+with open(os.path.join(settings.BASE_DIR, '../common/enum/muscles.json')) as file:
+    muscles = json.load(file)
+
+MUSCLES_CHOICES = [(m['key'], m['value']) for m in muscles]
 
 
 class UserManager(BaseUserManager):
@@ -21,7 +30,6 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, firstname, lastname, password):
-
         """Create a new super user"""
         user = self.create_user(email=email, password=password, firstname=firstname, lastname=lastname)
 
@@ -30,6 +38,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
 
 class User(AbstractBaseUser):
     """database model for users"""
@@ -47,9 +56,17 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname']
 
-
     def __str__(self):
         """Return string representation of User"""
         return self.email
 
 
+class Muscle(models.Model):
+    """database model for muscle"""
+    slug = models.CharField(max_length=255, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """Return string representation of muscle"""
+        return self.slug
