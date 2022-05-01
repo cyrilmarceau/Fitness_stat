@@ -9,19 +9,13 @@ import {
     useFonts,
 } from "@expo-google-fonts/montserrat";
 import DispatcherNav from "@layout-navigations/DispatcherNav";
-import { createStackNavigator } from "@react-navigation/stack";
 import AppLoading from "expo-app-loading";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Colors, Typography } from "react-native-ui-lib";
 
 export default function App() {
-    /* prettier-ignore */
     let [fontsLoaded] = useFonts({
-        // "Montserrat": require("./assets/fonts/Montserrat-Bold.ttf"),
-        // "Montserrat": require("./assets/fonts/Montserrat-Medium.ttf"),
-        // "Montserrat": require("./assets/fonts/Montserrat-Regular.ttf"),
-        // "Montserrat": require("./assets/fonts/Montserrat-SemiBold.ttf"),
         Montserrat_400Regular,
         Montserrat_500Medium,
         Montserrat_600SemiBold,
@@ -52,7 +46,6 @@ export default function App() {
         return <AppLoading />;
     }
 
-    const Stack = createStackNavigator();
     return (
         <AuthProvider>
             <SafeAreaProvider>

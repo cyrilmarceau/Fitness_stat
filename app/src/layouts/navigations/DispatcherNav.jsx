@@ -2,9 +2,9 @@ import { useAuth } from "@contexts/authContext";
 import { removeKeysLS } from "@helpers";
 import AuthStack from "@layout-navigations/stacks/AuthStack";
 import RootStack from "@layout-navigations/stacks/RootStack";
-import _ from "lodash";
-import React, { useEffect, useState, createRef } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import _ from "lodash";
+import React, { createRef, useEffect, useState } from "react";
 import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
 
@@ -50,10 +50,7 @@ const DispatcherNav = () => {
 
     return (
         <>
-            <NavigationContainer
-                onStateChange={(state) => console.log("New state is", state)}
-                ref={navigationRef}
-            >
+            <NavigationContainer ref={navigationRef}>
                 {_.isNil(auth.member) ? <AuthStack /> : <RootStack nav={nav} />}
             </NavigationContainer>
 

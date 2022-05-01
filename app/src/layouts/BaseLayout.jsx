@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Colors } from "react-native-ui-lib";
 import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Colors, View } from "react-native-ui-lib";
 
 const LayoutView = ({ children }) => {
     return <View paddingH-20>{children}</View>;

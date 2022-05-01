@@ -12,7 +12,13 @@ import { Avatar, Colors, View } from "react-native-ui-lib";
 import CustomTabBar from "./CustomTabBar";
 
 const tabOptions = ({ route, navigation }) => {
-    const item = routes.find((routeItem) => routeItem.name === route.name); // get the route config object
+    const item = routes.find((routeItem) => {
+        // Check if in nested stack we have a screen who match with route for set title in header
+        if (route?.params?.screen) {
+            return routeItem.name === route.params.screen;
+        }
+        return routeItem.name === route.name;
+    });
 
     const commonHeader = {
         headerRightContainerStyle: {
@@ -41,18 +47,13 @@ const tabOptions = ({ route, navigation }) => {
         ),
         title: item.title,
     };
-    if (!item.showInTab) {
-        return {
-            tabBarButton: () => <View style={{ width: 0 }} />,
-            ...commonHeader,
-        };
-    }
 
     return {
         tabBarLabel: item.title || "",
         headerShown: true,
         tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: Colors.background,
+        showInTab: item.showInTab,
         ...commonHeader,
     };
 };
@@ -63,6 +64,7 @@ const AppTab = ({ navigation }) => {
     return (
         <Tab.Navigator
             backBehavior="history"
+            initialRouteName={screens.Home}
             tabBar={(props) => (
                 <BlurView style={styles.blurView} tint="dark">
                     <CustomTabBar {...props} />

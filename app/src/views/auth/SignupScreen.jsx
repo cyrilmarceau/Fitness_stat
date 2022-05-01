@@ -4,7 +4,7 @@ import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BaseLayout } from "@layout/BaseLayout";
 import { signupValidationSchema } from "@validations";
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, Colors, Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;

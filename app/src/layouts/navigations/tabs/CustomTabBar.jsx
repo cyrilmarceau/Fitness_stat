@@ -62,7 +62,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                     });
                 };
 
-                return !_.isNil(options.title) ? (
+                return !!options.showInTab ? (
                     <TouchableOpacity
                         key={index}
                         accessibilityRole="button"

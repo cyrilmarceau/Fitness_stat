@@ -1,4 +1,3 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { routes } from "@layout-navigations/routes";
 import AppTab from "@layout-navigations/tabs/AppTab";
 import {
@@ -7,7 +6,7 @@ import {
     DrawerItem,
 } from "@react-navigation/drawer";
 import React from "react";
-import { Avatar, Text } from "react-native-ui-lib";
+import { Colors, Text } from "react-native-ui-lib";
 
 const CustomDrawerContent = (props) => {
     const currentRouteName = props.nav()?.getCurrentRoute().name; // get focused route name
@@ -16,13 +15,15 @@ const CustomDrawerContent = (props) => {
         <DrawerContentScrollView {...props}>
             {routes
                 .filter((route) => route.showInDrawer)
-                .map((route, index) => {
-                    const focused = index === props.state.index;
-
+                .map((route) => {
                     return (
                         <DrawerItem
                             key={route.name}
-                            label={() => <Text>{route.title}</Text>}
+                            label={() => (
+                                <Text h6 style={[{ color: Colors.primary }]}>
+                                    {route.title}
+                                </Text>
+                            )}
                             onPress={() =>
                                 props.navigation.navigate("DrawerStack", { screen: route.name })
                             }
@@ -38,6 +39,7 @@ const RootStack = ({ nav }) => {
 
     return (
         <Drawer.Navigator
+            initialRouteName="Stack"
             screenOptions={{ headerShown: false }}
             drawerContent={(props) => <CustomDrawerContent {...props} nav={nav} />}
         >

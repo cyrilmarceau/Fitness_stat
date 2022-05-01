@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { BaseLayout, LayoutView } from "@layout/BaseLayout";
-import { ScrollView } from "react-native";
-import { useAuth } from "@contexts/authContext";
-import { Text, Card, Colors, View, Button } from "react-native-ui-lib";
 import API from "@api";
-import Workouts from "@components/Workouts";
 import Muscles from "@components/Muscles";
+import Workouts from "@components/Workouts";
+import { useAuth } from "@contexts/authContext";
+import { BaseLayout, LayoutView } from "@layout/BaseLayout";
+import React, { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
+import { Button, Colors, Text, View } from "react-native-ui-lib";
 
 const HomeScreen = ({ navigation }) => {
     const auth = useAuth();
