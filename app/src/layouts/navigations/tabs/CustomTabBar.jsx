@@ -2,10 +2,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Text } from "react-native-ui-lib";
+import _ from "lodash";
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
     const screenOptions = (route, color) => {
         let iconName;
+
         switch (route.name) {
             case "Login":
                 iconName = "login";
@@ -60,7 +62,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                     });
                 };
 
-                return (
+                return !_.isNil(options.title) ? (
                     <TouchableOpacity
                         key={index}
                         accessibilityRole="button"
@@ -76,11 +78,10 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                         }}
                     >
                         {screenOptions(descriptors[route.key].route, getColor)}
+                        {/* {options.tabBarLabel()} */}
                         <Text style={{ color: getColor, fontSize: 12 }}>{label}</Text>
-
-                        <View>{options.tabBarIcon}</View>
                     </TouchableOpacity>
-                );
+                ) : null;
             })}
         </View>
     );

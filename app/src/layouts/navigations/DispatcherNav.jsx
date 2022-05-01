@@ -50,7 +50,10 @@ const DispatcherNav = () => {
 
     return (
         <>
-            <NavigationContainer ref={navigationRef}>
+            <NavigationContainer
+                onStateChange={(state) => console.log("New state is", state)}
+                ref={navigationRef}
+            >
                 {_.isNil(auth.member) ? <AuthStack /> : <RootStack nav={nav} />}
             </NavigationContainer>
 

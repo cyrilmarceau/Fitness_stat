@@ -1,19 +1,34 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { routes } from "@layout-navigations/routes";
 import AppTab from "@layout-navigations/tabs/AppTab";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItem,
+} from "@react-navigation/drawer";
 import React from "react";
-
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from "@react-navigation/drawer";
+import { Avatar, Text } from "react-native-ui-lib";
 
 const CustomDrawerContent = (props) => {
-    console.log(props.state.routeNames);
     const currentRouteName = props.nav()?.getCurrentRoute().name; // get focused route name
 
     return (
         <DrawerContentScrollView {...props}>
-            <DrawerItem
-                label="Settings"
-                onPress={() => props.navigation.navigate("DrawerStack", { screen: "Settings" })}
-            />
+            {routes
+                .filter((route) => route.showInDrawer)
+                .map((route, index) => {
+                    const focused = index === props.state.index;
+
+                    return (
+                        <DrawerItem
+                            key={route.name}
+                            label={() => <Text>{route.title}</Text>}
+                            onPress={() =>
+                                props.navigation.navigate("DrawerStack", { screen: route.name })
+                            }
+                        />
+                    );
+                })}
         </DrawerContentScrollView>
     );
 };
@@ -22,8 +37,11 @@ const RootStack = ({ nav }) => {
     const Drawer = createDrawerNavigator();
 
     return (
-        <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} nav={nav} />}>
-            <Drawer.Screen name="Stack" component={AppTab} options={{ headerShown: false }} />
+        <Drawer.Navigator
+            screenOptions={{ headerShown: false }}
+            drawerContent={(props) => <CustomDrawerContent {...props} nav={nav} />}
+        >
+            <Drawer.Screen name="Stack" component={AppTab} />
         </Drawer.Navigator>
     );
 };

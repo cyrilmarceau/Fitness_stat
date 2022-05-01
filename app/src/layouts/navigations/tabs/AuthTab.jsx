@@ -1,11 +1,8 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoginScreen from "@views-auth/LoginScreen";
 import SignupScreen from "@views-auth/SignupScreen";
-import { BlurView } from "expo-blur";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Colors, Text } from "react-native-ui-lib";
+import { Colors } from "react-native-ui-lib";
 
 import CustomTabBar from "./CustomTabBar";
 
