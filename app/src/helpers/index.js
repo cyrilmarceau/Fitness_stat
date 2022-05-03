@@ -1,8 +1,18 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import errorJSON from "@i18n/fr.json";
-import _, { forEach } from "lodash";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import _ from "lodash";
 
 const _i18n = (key, codeError) => errorJSON[key][codeError];
+
+const clearLS = async () => {
+    try {
+        await AsyncStorage.clear();
+    } catch (e) {
+        // clear error
+    }
+
+    console.log("Done.");
+};
 
 const getLS = async (key) => {
     try {
@@ -47,4 +57,4 @@ const removeKeysLS = async (keys) => {
         // remove error
     }
 };
-export { _i18n, getLS, setKeyLS, removekeyLS, removeKeysLS };
+export { _i18n, clearLS, getLS, setKeyLS, removekeyLS, removeKeysLS };

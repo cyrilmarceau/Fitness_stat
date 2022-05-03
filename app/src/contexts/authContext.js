@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
 import _ from "lodash";
 import API from "@api";
-import { _i18n, setKeyLS, getLS } from "@helpers";
+import { _i18n, setKeyLS, getLS, removeKeysLS } from "@helpers";
 import axios from "axios";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [member, setMember] = useState(null);
+    const [member, setMember] = useState();
+    const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(null);
 
     const nonError = {
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
                 // Save refresh_token for automatic connection
                 setKeyLS("refreshToken", res.refresh_token);
                 setMember(res.user);
+                setIsAuth(true);
                 return nonError;
             }
         } catch (err) {
@@ -66,6 +68,17 @@ export const AuthProvider = ({ children }) => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const logout = async () => {
+        try {
+            const { detail } = await API.logout();
+            if (detail === "Successfully logged out.") {
+                await removeKeysLS(["accessToken", "refreshToken"]);
+                setIsAuth(false);
+                return nonError;
+            }
+        } catch (error) {}
     };
 
     const verifyToken = async () => {
@@ -111,6 +124,7 @@ export const AuthProvider = ({ children }) => {
     const refreshToken = async () => {
         try {
             const refreshTokenLS = await getLS("refreshToken");
+            console.log(refreshTokenLS);
             if (!_.isNil(refreshTokenLS)) {
                 const request = { refresh: refreshTokenLS };
 
@@ -123,6 +137,7 @@ export const AuthProvider = ({ children }) => {
 
                 const me = await API.me();
                 setMember(me);
+                setIsAuth(true);
 
                 return nonError;
             }
@@ -154,7 +169,9 @@ export const AuthProvider = ({ children }) => {
             value={{
                 member,
                 loading,
+                isAuth,
                 login,
+                logout,
                 verifyToken,
                 refreshToken,
             }}

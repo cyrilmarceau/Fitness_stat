@@ -8,11 +8,14 @@ const LayoutView = ({ children }) => {
     return <View paddingH-20>{children}</View>;
 };
 
-const BaseLayout = ({ children, enablePadding }) => {
+const BaseLayout = ({ children, enablePadding, enableSAV }) => {
     return (
-        <SafeAreaView edges={["right", "left"]} style={[styles.background, { flex: 1 }]}>
+        <SafeAreaView
+            edges={enableSAV ? ["left", "top", "right", "bottom"] : ["right", "left"]}
+            style={[styles.background, { flex: 1 }]}
+        >
             <StatusBar style="dark" />
-            <View style={enablePadding ?? { paddingHorizontal: 20 }}>{children}</View>
+            <View style={enablePadding && { paddingHorizontal: 20 }}>{children}</View>
         </SafeAreaView>
     );
 };

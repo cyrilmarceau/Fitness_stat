@@ -23,4 +23,8 @@ const signupValidationSchema = Yup.object().shape({
         .min(8, "Le mot de passe est trop court. 8 caractères minimum"),
 });
 
-export { loginValidationSchema, signupValidationSchema };
+const resetValidationSchema = Yup.object().shape({
+    email: Yup.string().required("Le champs email est requis").email("L'email est invalide"),
+});
+
+export { loginValidationSchema, signupValidationSchema, resetValidationSchema };

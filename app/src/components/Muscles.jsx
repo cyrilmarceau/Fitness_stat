@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, Colors, Button } from "react-native-ui-lib";
+import { Card, Colors } from "react-native-ui-lib";
 
 const Muscles = ({ muscles }) => {
     return (
         <>
-            {muscles?.map((muscle, index) => {
+            {muscles?.map((muscle) => {
                 return (
                     <Card
                         key={muscle.key}

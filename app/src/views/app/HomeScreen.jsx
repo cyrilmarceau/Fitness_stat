@@ -6,17 +6,18 @@ import { BaseLayout, LayoutView } from "@layout/BaseLayout";
 import React, { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { Button, Colors, Text, View } from "react-native-ui-lib";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 const HomeScreen = ({ navigation }) => {
     const auth = useAuth();
-
     const [muscles, setMuscles] = useState([]);
+    const tabBarHeight = useBottomTabBarHeight() + 15;
 
     const getMuscles = async () => {
         const datas = await API.getMuscles();
         setMuscles(datas);
     };
-
+    console.log(tabBarHeight);
     useEffect(() => {
         getMuscles();
     }, []);

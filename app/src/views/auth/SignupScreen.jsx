@@ -6,7 +6,7 @@ import { BaseLayout } from "@layout/BaseLayout";
 import { signupValidationSchema } from "@validations";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Colors, Incubator } from "react-native-ui-lib";
+import { Button, Colors, Incubator, Text } from "react-native-ui-lib";
 const { Toast } = Incubator;
 
 export const SignupScreen = ({ navigation }) => {
@@ -17,39 +17,22 @@ export const SignupScreen = ({ navigation }) => {
     const onSubmit = (data) => {};
 
     return (
-        <BaseLayout>
-            {/* <LoaderScreen color={Colors.primary} overlay /> */}
+        <BaseLayout enablePadding={true} enableSAV>
+            <Text h4 primary center>
+                C'est le moment de s'inscrire sur fitness stat :)
+            </Text>
 
-            <>
-                <FormProvider {...methods}>
-                    <FormBuilder fieldsList={signupFieldsJSON} />
-                    <Button
-                        onPress={methods.handleSubmit(onSubmit)}
-                        label="S'inscrire"
-                        size={Button.sizes.large}
-                        outlineColor={Colors.primary}
-                        style={{ marginVertical: BUTTON_MARGIN }}
-                        outline
-                    />
-                </FormProvider>
-                {/* {isError && (
-                    <Toast
-                        message={isSuccess ? "Inscription réussie" : message}
-                        visible={isError || isSuccess ? true : false}
-                        position={"top"}
-                        swipeable={true}
-                        autoDismiss={5000}
-                        zIndex={2}
-                        preset={
-                            isSuccess
-                                ? Incubator.ToastPresets.SUCCESS
-                                : Incubator.ToastPresets.FAILURE
-                        }
-                        containerStyle={{ top: 0 }}
-                        centerMessage
-                    />
-                )} */}
-            </>
+            <FormProvider {...methods}>
+                <FormBuilder fieldsList={signupFieldsJSON} />
+                <Button
+                    onPress={methods.handleSubmit(onSubmit)}
+                    label="Je créer mon compte"
+                    size={Button.sizes.large}
+                    outlineColor={Colors.primary}
+                    style={{ marginVertical: BUTTON_MARGIN - 15 }}
+                    outline
+                />
+            </FormProvider>
         </BaseLayout>
     );
 };

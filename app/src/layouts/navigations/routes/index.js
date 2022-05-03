@@ -1,16 +1,49 @@
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as React from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
 
+// STRUCTURE
+// <NAME> -> screen name
+// <NAME>Stack -> new stack
+// <NAME>Base -> Screen that must be opened as a modal
 export const screens = {
+    // Auth Stack and screens
+    Login: "Login",
+    Signup: "Signup",
+    ForgetPassword: "ForgetPassword",
+    ForgetPasswordBase: "ForgetPasswordBase",
+
+    // App Stacks and screens
     Home: "Home",
     WorkoutStack: "WorkoutStack",
     MealStack: "MealStack",
     DrawerStack: "DrawerStack",
-    SettingsScreen: "SettingsScreen",
     AccountScreen: "AccountScreen",
+    SettingsScreen: "SettingsScreen",
+    AboutScreen: "AboutScreen",
 };
 
 export const routes = [
+    {
+        name: screens.Login,
+        focusedRoute: screens.Login,
+        title: "Se connecter",
+        showInTab: true,
+        showInDrawer: false,
+    },
+    {
+        name: screens.Signup,
+        focusedRoute: screens.Signup,
+        title: "S'inscrire",
+        showInTab: true,
+        showInDrawer: false,
+    },
+    {
+        name: screens.ForgetPasswordBase,
+        focusedRoute: screens.ForgetPasswordBase,
+        title: "Réinitialiser",
+        showInTab: true,
+        showInDrawer: false,
+    },
     {
         name: screens.Home,
         focusedRoute: screens.Home,
@@ -41,9 +74,12 @@ export const routes = [
     {
         name: screens.AccountScreen,
         focusedRoute: screens.AccountScreen,
-        title: "Mon compte",
+        title: "Profil",
         showInTab: false,
         showInDrawer: true,
+        icon: (color, size) => (
+            <MaterialCommunityIcons name="account-edit-outline" size={size} color={color} />
+        ),
     },
     {
         name: screens.SettingsScreen,
@@ -51,5 +87,16 @@ export const routes = [
         title: "Paramètres",
         showInTab: false,
         showInDrawer: true,
+        icon: (color, size) => <Ionicons name="ios-settings-outline" size={size} color={color} />,
+    },
+    {
+        name: screens.AboutScreen,
+        focusedRoute: screens.AboutScreen,
+        title: "A propos",
+        showInTab: false,
+        showInDrawer: true,
+        icon: (color, size) => (
+            <MaterialCommunityIcons name="information-outline" size={size} color={color} />
+        ),
     },
 ];

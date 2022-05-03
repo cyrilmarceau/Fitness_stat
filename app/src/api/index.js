@@ -49,6 +49,9 @@ const that = {
         if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
         return that.postRoute(`${APP_ROUTE}auth/login/`, values, false);
     },
+    logout() {
+        return that.postRoute(`${APP_ROUTE}auth/logout/`, {}, true);
+    },
     verifyToken(accessToken) {
         if (_.isNil(accessToken)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
         return that.postRoute(`${APP_ROUTE}auth/token/verify/`, accessToken, false);

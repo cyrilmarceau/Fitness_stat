@@ -8,7 +8,7 @@ import HomeScreen from "@views-app/HomeScreen";
 import { BlurView } from "expo-blur";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Avatar, Colors, View } from "react-native-ui-lib";
+import { Avatar, Colors } from "react-native-ui-lib";
 import CustomTabBar from "./CustomTabBar";
 
 const tabOptions = ({ route, navigation }) => {

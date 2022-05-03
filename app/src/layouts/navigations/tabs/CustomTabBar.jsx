@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Text } from "react-native-ui-lib";
+import { Text, Colors } from "react-native-ui-lib";
 import _ from "lodash";
 
 const CustomTabBar = ({ state, descriptors, navigation }) => {
@@ -24,14 +24,29 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
             case "MealStack":
                 iconName = "food-variant";
                 break;
+            case "ForgetPasswordBase":
+                iconName = "lock-reset";
+                break;
+
             default:
                 break;
         }
         return <MaterialCommunityIcons name={iconName} color={color} size={24} />;
     };
 
+    const isAuthStack = navigation.getParent().getState().routeNames.includes("AuthTab")
+        ? true
+        : false;
+
     return (
-        <View style={{ height: 80, flexDirection: "row", borderRadius: 9 }}>
+        <View
+            style={{
+                height: 80,
+                flexDirection: "row",
+                borderRadius: 20,
+                backgroundColor: isAuthStack && Colors.secondary,
+            }}
+        >
             {state.routes.map((route, index) => {
                 const { options } = descriptors[route.key];
 
