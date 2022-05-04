@@ -1,14 +1,16 @@
-import json
 import logging
 
-from core.models import User
-from dj_rest_auth.serializers import LoginSerializer, UserDetailsSerializer
-from django.contrib.auth import get_user_model
-from django.utils.encoding import force_str
-from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
+from api import settings
+from dj_rest_auth.serializers import UserDetailsSerializer
+from dj_rest_auth.registration.serializers import RegisterSerializer
 
-from .errors import DetailsResponse, ErrorResponse, SuccessValue
+from django.db import transaction
+
+from django.contrib.auth import get_user_model
+
+from core.models import User
+
+from rest_framework import serializers
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +33,22 @@ class UserSerializerTest(serializers.ModelSerializer):
     def create(self, validated_data):
         """Create and return a new user"""
         user = get_user_model().objects.create_user(**validated_data)
+        return user
+
+
+class CustomRegisterSerializer(RegisterSerializer):
+    firstname = serializers.CharField(max_length=255)
+    lastname = serializers.CharField(max_length=255)
+    phone = serializers.CharField(max_length=30)
+
+    @transaction.atomic
+    def save(self, request):
+
+        user = super().save(request)
+        user.firstname = self.data.get('firstname')
+        user.lastname = self.data.get('lastname')
+        user.phone = self.data.get('phone')
+        user.save()
         return user
 
 

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <style>
+            /* GLOBAL RESETS
+            ------------------------------------- */
+            img {
+                border: none;
+                max-width: 100%;
+                -ms-interpolation-mode: bicubic;
+            }
+
+            body {
+                background-color: #f6f6f6;
+                width: 100%;
+                font-family: Verdana, sans-serif;
+                -webkit-font-smoothing: antialiased;
+                font-size: 16px;
+                line-height: 1.4;
+                margin: 0;
+                padding: 0;
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            }
+
+            table {
+                border-collapse: separate;
+                mso-table-lspace: 0pt;
+                mso-table-rspace: 0pt;
+                width: 100%;
+            }
+
+            table td {
+                font-family: Verdana, sans-serif;
+                font-size: 16px;
+                vertical-align: top;
+            }
+
+            /* CONTAINER
+            ------------------------------------- */
+            .container {
+                display: block;
+                margin: 0 auto !important;
+                /* makes it centered */
+                max-width: 700px;
+                /* padding: 10px; */
+                width: 700px;
+            }
+
+            .content {
+                box-sizing: border-box;
+                display: block;
+                margin: 0 auto;
+                max-width: 720px;
+                padding: 0 10px 10px;
+            }
+
+            /* MAIL PARTS
+            ------------------------------------- */
+            .main {
+                background: #ffffff;
+                border-radius: 3px;
+                width: 100%;
+            }
+
+            .wrapper {
+                box-sizing: border-box;
+                padding: 25px 40px;
+            }
+
+            .content-block {
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            .footer {
+                clear: both;
+                margin-top: 10px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .footer td,
+            .footer p,
+            .footer span,
+            .footer a {
+                color: #999999;
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .mailing-content table:not(.custom-table) {
+                border-collapse: collapse !important;
+                margin-bottom: 16px;
+            }
+            .mailing-content table:not(.custom-table) thead th {
+                border-bottom: 2px solid #dee2e6;
+            }
+
+            .mailing-content table:not(.custom-table) td,
+            .mailing-content table:not(.custom-table) th {
+                padding: 5px 10px;
+                border-top: 1px solid #dee2e6;
+            }
+
+            .mailing-content table:not(.custom-table) tr:last-child td {
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .mailing-content.newsletter-content
+                table:not(.custom-table)
+                > tbody
+                > tr
+                > td:nth-child(1) {
+                width: 160px;
+            }
+
+            /* TYPOGRAPHY
+            ------------------------------------- */
+            h1,
+            h2,
+            h3,
+            h4 {
+                color: #000000;
+                font-family: Verdana, sans-serif;
+                font-weight: 400;
+                line-height: 1.3;
+                margin: 0;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            h1 {
+                font-size: 35px;
+                font-weight: 300;
+                text-align: center;
+            }
+            h2 {
+                font-size: 23px;
+                font-weight: bold;
+            }
+            h3 {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            p {
+                font-family: Verdana, sans-serif;
+                font-size: 16px;
+                font-weight: normal;
+                margin-bottom: 10px;
+            }
+
+            ul,
+            ol {
+                font-family: Verdana, sans-serif;
+                font-size: 16px;
+                font-weight: normal;
+                list-style-type: disc;
+            }
+
+            ul li {
+            }
+            ol li {
+            }
+
+            a {
+                color: #3498db;
+                text-decoration: underline;
+            }
+
+            /* BUTTONS
+            ------------------------------------- */
+            table.btn {
+                box-sizing: border-box;
+                width: 100%;
+            }
+
+            table.btn td.btn-container {
+                padding-bottom: 15px !important;
+            }
+
+            table.btn table {
+                width: auto;
+            }
+
+            table.btn table td {
+                background-color: #193757;
+                border-radius: 5px !important;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+
+            table.btn a {
+                background-color: #193757;
+                color: #fff;
+                text-decoration: none;
+                border: 1px solid #34495e;
+                border-radius: 5px;
+                padding: 7px 15px;
+                margin: 0;
+                display: inline-block;
+                cursor: pointer;
+            }
+
+            /* TABLE
+            ------------------------------------- */
+            table.data-table {
+                border: solid 1px #11263c;
+                border-collapse: collapse;
+                border-spacing: 0;
+                font: normal 13px Verdana, sans-serif;
+                margin-bottom: 10px;
+            }
+            table.data-table tbody td {
+                border: solid 1px #11263c;
+                padding: 10px;
+            }
+            table.data-table thead th,
+            table.data-table tbody td.highlight {
+                background-color: #9dbc43;
+                border: solid 1px #11263c;
+                color: #fff;
+                padding: 10px;
+                text-align: left;
+            }
+
+            table td.table-col-1-2 {
+                width: 50% !important;
+                max-width: 50% !important;
+            }
+
+            /* HEADER
+            ------------------------------------- */
+
+            .header-cover {
+                font-size: 0;
+                line-height: 0;
+                margin: 0;
+                padding: 25px 15px;
+                color: #fff;
+                text-align: center;
+                /* background: #9dbc43; */
+            }
+            .header-cover h1 {
+                color: #fff;
+                font-weight: 800;
+                margin-bottom: 0;
+            }
+
+            /* OTHERS
+            ------------------------------------- */
+            .mb-0 {
+                margin-bottom: 0;
+            }
+            .mt-0 {
+                margin-top: 0;
+            }
+
+            .align-center {
+                text-align: center;
+            }
+            .align-right {
+                text-align: right;
+            }
+            .align-left {
+                text-align: left;
+            }
+
+            .clear {
+                clear: both;
+            }
+
+            .preheader {
+                color: transparent;
+                display: none;
+                height: 0;
+                max-height: 0;
+                max-width: 0;
+                opacity: 0;
+                overflow: hidden;
+                mso-hide: all;
+                visibility: hidden;
+                width: 0;
+            }
+
+            hr {
+                border: 0;
+                border-bottom: 1px solid #f6f6f6;
+                margin: 20px 0;
+            }
+
+            /* -------------------------------------
+                RESPONSIVE AND MOBILE FRIENDLY STYLES
+            ------------------------------------- */
+            @media only screen and (max-width: 620px) {
+                table[class='body'] h1 {
+                    font-size: 28px !important;
+                    margin-bottom: 10px !important;
+                }
+
+                table[class='body'] p,
+                table[class='body'] ul,
+                table[class='body'] ol,
+                table[class='body'] td,
+                table[class='body'] span,
+                table[class='body'] a {
+                    font-size: 16px !important;
+                }
+
+                table[class='body'] .wrapper,
+                table[class='body'] .article {
+                    padding: 10px !important;
+                }
+
+                table[class='body'] .content {
+                    padding: 0 !important;
+                }
+
+                table[class='body'] .container {
+                    padding: 0 !important;
+                    width: 100% !important;
+                }
+
+                table[class='body'] .main {
+                    border-left-width: 0 !important;
+                    border-radius: 0 !important;
+                    border-right-width: 0 !important;
+                }
+
+                table[class='body'] .btn table {
+                    width: 100% !important;
+                }
+
+                table[class='body'] .btn a {
+                    width: 100% !important;
+                }
+
+                table[class='body'] .img-responsive {
+                    height: auto !important;
+                    max-width: 100% !important;
+                    width: auto !important;
+                }
+            }
+
+            /* PRESERVE THESE STYLES IN THE HEAD
+		    ------------------------------------- */
+            @media all {
+                table.btn table td:hover {
+                    background-color: #34495e !important;
+                }
+            }
+        </style>
+    </head>
+
+    <body class="">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+            <tr>
+                <td>&nbsp;</td>
+                <td class="container">
+                    <div class="content">
+                        <!-- START HEADER CONTENT AREA -->
+                        <div class="header">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="">
+                                        <table
+                                            role="presentation"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                        >
+                                            <tr>
+                                                <td class="header-cover">
+                                                    <img
+                                                        src="https://www.neklan.fr/email/logo-w250.png"
+                                                        width="250"
+                                                        height="81"
+                                                    />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- END HEADER CONTENT AREA -->
+
+                        <!-- START CENTERED WHITE CONTAINER -->
+                        <table role="presentation" class="main">
+                            <!-- START MAIN CONTENT AREA -->
+                            <tr>
+                                <td class="wrapper">
+                                    <table
+                                        role="presentation"
+                                        border="0"
+                                        cellpadding="0"
+                                        cellspacing="0"
+                                    >
+                                        <tr>
+                                            <td>
+                                                <div class="mailing-content">
+                                                    {% block html_layout_content %}{% endblock html_layout_content %}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- END MAIN CONTENT AREA -->
+                        </table>
+                        <!-- END CENTERED WHITE CONTAINER -->
+
+                        <!-- START FOOTER -->
+                        <div class="footer">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td class="content-block">
+                                        <p style="margin-bottom: 5px;">
+                                            NEKLAN<br />
+                                            12 Rue des Cévennes<br />
+                                            91090 Lisses
+                                        </p>
+                                        <p style="margin-bottom: 5px;">
+                                            Cet email est envoyé de manière automatique. Veuillez ne
+                                            pas répondre à cet email.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- END FOOTER -->
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+    </body>
+</html>

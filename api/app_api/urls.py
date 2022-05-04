@@ -1,18 +1,12 @@
 from django.urls import path, include
-from rest_framework import routers
 from app_api import views
-from jwt import utils
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
-router = routers.DefaultRouter()
-router.register('users', views.UserViewSet, basename='User')
 
 urlpatterns = [
-    # Crud
-    path('', include(router.urls)),
     path('auth/', include('dj_rest_auth.urls')),
+    path('auth/registration/', include('dj_rest_auth.registration.urls')),
+    # path('auth/account-confirm-email/',
+    #      VerifyEmailView.as_view(),
+    #      name='account_email_verification_sent'
+    #      ),
     path('muscles/', views.ListMuscle.as_view()),
 ]
