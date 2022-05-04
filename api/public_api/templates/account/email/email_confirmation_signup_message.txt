@@ -1,11 +1,11 @@
-{% extends "account/email/base_message.txt" %}
 {% load account %}
-{% load i18n %}
 
-YEP YEP
-
-
-{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're receiving this e-mail because user {{ user_display }} has given your e-mail address to register an account on {{ site_domain }}.
-
-To YEP YEP confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
+{% block content %}
+{% autoescape off %}
+{% user_display user as user_display %}
+Bonjour,
+Vous recevez cette e-mail car l'utilisateur {{ user_display }} a donné votre adresse email depuis l'application {{ APP_NAME }}.
+Afin de confirmer que c'est correct, cliquer ici: {{ activate_url }}
+{% endautoescape %}
+{% endblock %}
 

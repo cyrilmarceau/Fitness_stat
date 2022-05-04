@@ -19,12 +19,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
-
 
 def get_bool_from_env(name, default_value):
     if name in os.environ:
@@ -36,7 +30,13 @@ def get_bool_from_env(name, default_value):
     return default_value
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# ENV VARIABLES
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+APP_NAME = str(os.getenv('APP_NAME', 'Fitness stat'))
 
 ## DEBUG VARIABLES
 DEBUG = True if str(os.getenv('DJANGO_MODE')) == "development" else False
@@ -78,6 +78,7 @@ INSTALLED_APPS = [
 ]
 
 # --------- EMAIL CONFIG ---------
+
 # if DEBUG_EMAIL:
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "mailhog"
@@ -117,6 +118,12 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Must verify account email
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''  # Disable default prefix
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False  # Manually press button for validate account
+
+if DEBUG:
+    LOGIN_URL = 'http://0.0.0.0:9010/public/account-validate/'
+else:
+    LOGIN_URL = 'http://0.0.0.0:9010/public/account-validate/'
 
 # JWT
 SIMPLE_JWT = {
@@ -157,6 +164,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'api.context_processors.custom_variables'
             ],
         },
     },

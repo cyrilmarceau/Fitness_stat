@@ -22,5 +22,5 @@ router = routers.SimpleRouter()
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/app/', include('app_api.urls')),
-    path('public', include('public_api.urls')),
+    path('public/', include('public_api.urls')),
 ]

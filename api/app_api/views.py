@@ -1,16 +1,18 @@
 import logging
 
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
+
 from rest_framework import viewsets, status
+
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from rest_framework.exceptions import APIException
 from rest_framework.views import APIView
 
 from .serializers import UserSerializerTest
-from core.models import User, Muscle, muscles
+from core.models import muscles
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +37,5 @@ class UserViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class ListMuscle(APIView):
     def get(self, request, format=None):
-        """
-        Return a list of dictionary(key, value) of all muscles.
-        """
+        """ Return a list of dictionary(key, value) of all muscles."""
         return Response(muscles)

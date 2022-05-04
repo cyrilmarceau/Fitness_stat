@@ -1,0 +1,15 @@
+{% extends "./layout.html" %}
+    {% block html_layout_content %}
+
+    {% load account %}
+
+    {% block content %}
+        {% autoescape off %}
+            {% user_display user as user_display %}
+            <p>Bonjour,</p>
+            <p>Vous recevez cette e-mail car l'utilisateur {{ user_display }} a donné votre adresse email depuis l'application {{ APP_NAME }}.</p>
+            <p>Afin de confirmer que c'est correct: <a href="{{ activate_url }}">Cliquer ici</a></p>
+        {% endautoescape %}
+    {% endblock content %}
+
+{% endblock html_layout_content %}

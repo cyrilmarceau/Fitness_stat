@@ -1,6 +1,5 @@
 import logging
 
-from api import settings
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 
