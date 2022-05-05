@@ -121,9 +121,9 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = ''  # Disable default prefix
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False  # Manually press button for validate account
 
 if DEBUG:
-    LOGIN_URL = 'http://0.0.0.0:9010/public/account-validate/'
+    LOGIN_URL = 'http://0.0.0.0:9010/public/auth/account-validate/'
 else:
-    LOGIN_URL = 'http://0.0.0.0:9010/public/account-validate/'
+    LOGIN_URL = 'http://0.0.0.0:9010/public/auth/account-validate/'
 
 # JWT
 SIMPLE_JWT = {

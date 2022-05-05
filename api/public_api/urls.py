@@ -1,10 +1,6 @@
 from django.urls import path
-from dj_rest_auth.registration.views import VerifyEmailView
-from allauth.account.views import ConfirmEmailView
+from .views import AccountValidateView
 
 urlpatterns = [
-    path('auth/account-confirm-email/',
-         VerifyEmailView.as_view(),
-         name='account_email_verification_sent'
-         ),
+    path('auth/account-validate/', AccountValidateView.as_view(), name='account_validate'),
 ]
