@@ -19,7 +19,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 def get_bool_from_env(name, default_value):
     if name in os.environ:
         value = os.environ[name]
@@ -79,13 +78,13 @@ INSTALLED_APPS = [
 
 # --------- EMAIL CONFIG ---------
 
-# if DEBUG_EMAIL:
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "mailhog"
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = None
-EMAIL_HOST_PASSWORD = None
-EMAIL_USE_TLS = False
+if DEBUG_EMAIL:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = "mailhog"
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = None
+    EMAIL_HOST_PASSWORD = None
+    EMAIL_USE_TLS = False
 
 # --------- PACKAGES CONFIG ---------
 
@@ -104,14 +103,15 @@ REST_AUTH_SERIALIZERS = {
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'app_api.serializers.CustomRegisterSerializer',
+    'REGISTER_SERIALIZER': 'app_api.serializers.CustomRegisterSerializer'
 }
 
 # DJANGO EMAIL FROM
 DEFAULT_FROM_EMAIL = os.environ.get("MAILGUN_SENDER_EMAIL_FROM", "app@fitness-stat.com")
 
 #  DJANGO-ALLAUTH
-ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_ADAPTER = 'app_api.adaptater.DefaultAccountAdapterCustom'  # Override activate_url
+ACCOUNT_EMAIL_REQUIRED = True # must verify email when signup
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Must verify account email
@@ -119,6 +119,7 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''  # Disable default prefix
 ACCOUNT_CONFIRM_EMAIL_ON_GET = False  # Manually press button for validate account
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1  # Expiration email link in day
 
 if DEBUG:
     LOGIN_URL = 'http://0.0.0.0:9010/public/auth/account-validate/'
@@ -138,6 +139,8 @@ SIMPLE_JWT = {
 }
 
 # --------- DJANGO AND DJANGO_REST CONFIG ---------
+
+PASSWORD_RESET_TIMEOUT = 86400 # email link available for 1 day
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
