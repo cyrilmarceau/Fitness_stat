@@ -1,11 +1,23 @@
 import os
 import json
+import logging
+
 from api import settings
 
 from django.db import models
+from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth import get_user_model
+
+from allauth.account.signals import user_signed_up, password_changed, password_reset, \
+    email_confirmed
+
+from public_api.utils import send_mail
+
+logger = logging.getLogger(__name__)
+
 
 with open(os.path.join(settings.BASE_DIR, '../common/enum/muscles.json')) as file:
     muscles = json.load(file)
@@ -70,3 +82,27 @@ class Muscle(models.Model):
     def __str__(self):
         """Return string representation of muscle"""
         return self.slug
+
+
+@receiver(user_signed_up)
+def after_user_signup(request, user, **kwargs):
+    logger.debug('---- AFTER USER SIGNUP----')
+
+    user_inst = User.objects.get(email=user)
+    context = {}
+    send_mail('new_user', user_inst, 'account/email/test.html', context)
+
+
+@receiver(password_changed)
+def after_password_changed(request, user, **kwargs):
+    logger.error('---- AFTER PASSWORD CHANGED----')
+
+
+@receiver(password_reset)
+def after_password_reset(request, user, **kwargs):
+    logger.error('---- AFTER PASSWORD RESET----')
+
+
+@receiver(email_confirmed)
+def after_email_confirmed(request, email_address, **kwargs):
+    logger.error('---- AFTER EMAIL CONFIRMED ----')

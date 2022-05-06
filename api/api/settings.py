@@ -78,6 +78,10 @@ INSTALLED_APPS = [
 
 # --------- EMAIL CONFIG ---------
 
+SUBJECT_EMAIL = {
+    'new_user': f"Bienvenue sur l'application {APP_NAME}"
+}
+
 if DEBUG_EMAIL:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
     EMAIL_HOST = "mailhog"
