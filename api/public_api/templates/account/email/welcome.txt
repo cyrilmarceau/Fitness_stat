@@ -1,0 +1,5 @@
+Bonjour {{ firstname }} {{ lastname }},</p>
+
+<p>Bienvenue sur l'application, vous allez recevoir un mail afin de valider votre compte.</p>
+
+<p>A bientôt sur l'application.</p>

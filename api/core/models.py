@@ -86,11 +86,17 @@ class Muscle(models.Model):
 
 @receiver(user_signed_up)
 def after_user_signup(request, user, **kwargs):
-    logger.debug('---- AFTER USER SIGNUP----')
-
     user_inst = User.objects.get(email=user)
-    context = {}
-    send_mail('new_user', user_inst, 'account/email/test.html', context)
+
+    context = {
+        'firstname': user.firstname,
+        'lastname': user.lastname
+    }
+    return send_mail(user_inst,
+                     'new_user',
+                     'account/email/welcome.html',
+                     'account/email/welcome.txt',
+                     **context)
 
 
 @receiver(password_changed)

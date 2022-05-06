@@ -255,6 +255,10 @@ LOGGING = {
         'core': {
             'handlers': ['console'],
             'level': 'DEBUG',
+        },
+        'public_api': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
         }
     }
 }
