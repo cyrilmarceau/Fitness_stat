@@ -3,6 +3,8 @@ services:
     mailhog:
         restart: unless-stopped
         image: mailhog/mailhog
+        logging:
+            driver: 'none'
         ports:
             - '9014:8025'
     database:
@@ -32,6 +34,8 @@ services:
             - DB_PASSWORD=${DB_PASSWORD}
             - DB_HOST=database
             - DB_PORT=3306
+        env_file:
+            - .env
         ports:
             - 9010:80
         depends_on:
