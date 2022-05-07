@@ -25,9 +25,15 @@
     },
 
     {   
-        "name": "password",
+        "name": "password1",
         "placeholder": "Mot de passe",
         "type": "password",
-        "defaultValue": "CyrilCyril"
+        "defaultValue": "Cyril"
+    },
+        {   
+        "name": "password2",
+        "placeholder": "Confirmer votre mot de passe",
+        "type": "password",
+        "defaultValue": "Cyril"
     }
 ]

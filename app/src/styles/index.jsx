@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
 import { WINDOWS_HEIGHT } from "@constants";
+import { StyleSheet } from "react-native";
+import { Colors } from "react-native-ui-lib";
 
 export default StyleSheet.create({
     centerLoader: {
@@ -10,5 +11,14 @@ export default StyleSheet.create({
         height: WINDOWS_HEIGHT,
         justifyContent: "center",
         alignItems: "center",
+    },
+    topBarModal: {
+        height: 5,
+        width: 80,
+        backgroundColor: "#2980B9",
+        marginLeft: "auto",
+        marginRight: "auto",
+        borderRadius: 20,
+        top: 20,
     },
 });

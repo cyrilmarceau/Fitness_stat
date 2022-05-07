@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { routes, screens } from "@layout-navigations/routes";
 import LoginScreen from "@views-auth/LoginScreen";
 import SignupScreen from "@views-auth/SignupScreen";
 import ForgetPassword from "@views-auth/ForgetPassword";
+import { routes, screens } from "@layout-navigations/routes";
 import React from "react";
 import { Colors } from "react-native-ui-lib";
-
+import ForgetPasswordStack from "@layout-navigations/stacks/auth/ForgetPasswordStack";
 import CustomTabBar from "./CustomTabBar";
 
 const tabOptions = ({ route, navigation }) => {
@@ -18,12 +18,12 @@ const tabOptions = ({ route, navigation }) => {
     });
 
     return {
+        showInTab: item.showInTab,
         title: item.title,
         tabBarLabel: item.title || "",
         headerShown: false,
         tabBarActiveTintColor: Colors.background,
         tabBarInactiveTintColor: "#F2CC8F",
-        showInTab: item.showInTab,
     };
 };
 
@@ -43,11 +43,11 @@ const AuthTab = () => {
                 listeners={({ navigation }) => ({
                     tabPress: (e) => {
                         e.preventDefault();
-                        navigation.navigate("ForgetPassword");
+                        navigation.navigate(screens.ForgetPasswordStack);
                     },
                 })}
                 name={screens.ForgetPasswordBase}
-                component={ForgetPassword}
+                component={ForgetPasswordStack}
             />
         </Tab.Navigator>
     );

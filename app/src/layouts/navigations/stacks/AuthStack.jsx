@@ -1,7 +1,7 @@
+import { screens } from "@layout-navigations/routes";
+import ForgetPasswordStack from "@layout-navigations/stacks/auth/ForgetPasswordStack";
 import AuthTab from "@layout-navigations/tabs/AuthTab";
-import { routes, screens } from "@layout-navigations/routes";
 import { createStackNavigator } from "@react-navigation/stack";
-import ForgetPassword from "@views-auth/ForgetPassword";
 import React from "react";
 
 const AuthStack = () => {
@@ -17,8 +17,8 @@ const AuthStack = () => {
                 options={{
                     presentation: "modal",
                 }}
-                name={screens.ForgetPassword}
-                component={ForgetPassword}
+                name={screens.ForgetPasswordStack}
+                component={ForgetPasswordStack}
             />
         </Stack.Navigator>
     );

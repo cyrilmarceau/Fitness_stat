@@ -1,14 +1,19 @@
 {
     "signup": {
-        "unique": "Cette adresse email existe déjà. Veuillez la changer"
+        "email_already_exist": "Cette adresse email existe déjà. Veuillez la changer",
+        "invalid_email": "Cette adresse email est invalide. Veuillez la changer",
+        "password_not_match": "Les mots de passe ne correspondent pas. Veuillez les réécrire",
+        "password_too_short": "Votre mot de passe est trop court. Il doit contenir au moins 8 caractères."
+    },
+    "forgetPassword": {
+        "invalid_email": "Cette adresse email est invalide. Veuillez la changer"
     },
     "login": {
-        "bad_formated": "Email mal formaté",
-        "invalid_credential": "Email ou mot de passe incorrect",
-        "non_field_errors": "Email ou mot de passe incorrect"
+        "email_not_verified": "Veuillez valider votre adresse email afin de pouvoir vous connecter",
+        "bad_credential": "Email ou mot de passe incorrect"
     },
     "default": {
-        "impossible_connexion": "Impossible de se connecter"
+        "request_blocked": "Impossible d'executer la demande"
     },
     "verifyToken": {
         "token_not_valid": "Connexion automatique impossible, veuillez vous reconnecter",

@@ -15,7 +15,9 @@ const BaseLayout = ({ children, enablePadding, enableSAV }) => {
             style={[styles.background, { flex: 1 }]}
         >
             <StatusBar style="dark" />
-            <View style={enablePadding && { paddingHorizontal: 20 }}>{children}</View>
+            <View style={[{ flex: 1 }, enablePadding && { paddingHorizontal: 20 }]}>
+                {children}
+            </View>
         </SafeAreaView>
     );
 };

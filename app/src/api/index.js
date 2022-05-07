@@ -49,6 +49,14 @@ const that = {
         if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
         return that.postRoute(`${APP_ROUTE}auth/login/`, values, false);
     },
+    forgetPassword(email) {
+        if (_.isNil(email)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
+        return that.postRoute(`${APP_ROUTE}auth/password/reset/`, email, false);
+    },
+    signup(values) {
+        if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
+        return that.postRoute(`${APP_ROUTE}auth/registration/`, values, false);
+    },
     logout() {
         return that.postRoute(`${APP_ROUTE}auth/logout/`, {}, true);
     },

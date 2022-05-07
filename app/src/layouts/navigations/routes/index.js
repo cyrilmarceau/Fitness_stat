@@ -5,12 +5,15 @@ import * as React from "react";
 // <NAME> -> screen name
 // <NAME>Stack -> new stack
 // <NAME>Base -> Screen that must be opened as a modal
+
 export const screens = {
     // Auth Stack and screens
     Login: "Login",
     Signup: "Signup",
+    ForgetPasswordStack: "ForgetPasswordStack",
     ForgetPassword: "ForgetPassword",
     ForgetPasswordBase: "ForgetPasswordBase",
+    ForgetPasswordEmailSend: "ForgetPasswordEmailSend",
 
     // App Stacks and screens
     Home: "Home",
@@ -38,10 +41,31 @@ export const routes = [
         showInDrawer: false,
     },
     {
+        name: screens.ForgetPasswordStack,
+        focusedRoute: screens.ForgetPasswordStack,
+        title: "",
+        showInTab: true,
+        showInDrawer: false,
+    },
+    {
         name: screens.ForgetPasswordBase,
         focusedRoute: screens.ForgetPasswordBase,
         title: "Réinitialiser",
         showInTab: true,
+        showInDrawer: false,
+    },
+    {
+        name: screens.ForgetPassword,
+        focusedRoute: screens.ForgetPassword,
+        title: "Réinitialiser votre mot de passe",
+        showInTab: false,
+        showInDrawer: false,
+    },
+    {
+        name: screens.ForgetPasswordEmailSend,
+        focusedRoute: screens.ForgetPasswordEmailSend,
+        title: "Réinitialiser votre mot de passe",
+        showInTab: false,
         showInDrawer: false,
     },
     {

@@ -1,11 +1,9 @@
 import { useAuth } from "@contexts/authContext";
-import { removeKeysLS, clearLS } from "@helpers";
+import { removeKeysLS } from "@helpers";
 import AuthStack from "@layout-navigations/stacks/AuthStack";
 import RootStack from "@layout-navigations/stacks/RootStack";
 import { NavigationContainer } from "@react-navigation/native";
-import _ from "lodash";
 import React, { createRef, useEffect, useState } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
 import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
 
@@ -52,7 +50,7 @@ const DispatcherNav = () => {
 
     const navigationRef = createRef();
     const nav = () => navigationRef.current;
-    const Stack = createStackNavigator();
+
     return (
         <>
             <NavigationContainer ref={navigationRef}>

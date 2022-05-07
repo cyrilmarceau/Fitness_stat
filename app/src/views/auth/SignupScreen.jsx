@@ -1,23 +1,39 @@
+import ToastError from "@components/ToastError";
 import { BUTTON_MARGIN } from "@constants";
+import { useAuth } from "@contexts/authContext";
 import signupFieldsJSON from "@fields/signup.json";
 import FormBuilder from "@form-builder/formBuilder";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BaseLayout } from "@layout/BaseLayout";
 import { signupValidationSchema } from "@validations";
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { Button, Colors, Incubator, Text } from "react-native-ui-lib";
-const { Toast } = Incubator;
+import { Button, Colors, Text } from "react-native-ui-lib";
+
 
 export const SignupScreen = ({ navigation }) => {
     const formOptions = { resolver: yupResolver(signupValidationSchema) };
 
     const methods = useForm(formOptions);
+    const auth = useAuth();
 
-    const onSubmit = (data) => {};
+    const [toastProps, setToastProps] = useState({message: ""})
+    const [error, setError] = useState(false);
+
+    const onSubmit = async (values) => {
+        const { success, error, message } = await auth.signup(values);
+
+        if (!success && error) {
+            setError(true);
+            setToastProps({message: message});
+        }
+    };
 
     return (
         <BaseLayout enablePadding={true} enableSAV>
+            {error && (
+                <ToastError error={error} setError={setError} toastProps={toastProps} />
+            )}
             <Text h4 primary center>
                 C'est le moment de s'inscrire sur fitness stat :)
             </Text>

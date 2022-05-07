@@ -1,2 +1,2 @@
-src/fields/
+src/utils/fields/*.json
 *.json
