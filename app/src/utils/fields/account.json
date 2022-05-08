@@ -19,13 +19,12 @@
         "placeholder": "Numéro de téléphone",
         "type": "text"
     },
-
-    {   
+        {   
         "name": "new_password1",
         "placeholder": "Mot de passe",
         "type": "password"
     },
-    {   
+        {   
         "name": "new_password2",
         "placeholder": "Confirmer votre mot de passe",
         "type": "password"

@@ -1,46 +1,31 @@
-import _ from "lodash";
-import React, { useEffect } from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import { Colors, Incubator, Text } from "react-native-ui-lib";
+import React from "react";
 
-const InputTextPasswordForm = ({ field }) => {
+import { useFormikContext } from 'formik';
+import { Colors, Incubator } from "react-native-ui-lib";
+
+const InputTextPasswordForm = ({ fl }) => {
+
     const { TextField } = Incubator;
-    const { control, setValue } = useFormContext();
-
-    useEffect(() => {
-        if (_.has(field, "defaultValue")) {
-            setValue(field.name, field.defaultValue);
-        }
-    }, []);
+    const { setFieldValue, handleBlur, values } = useFormikContext();
 
     return (
-        <Controller
-            control={control}
-            name={field.name}
-            render={({ field: { onChange, onBlur }, formState: { errors, isSubmitted } }) => (
-                <>
-                    <TextField
-                        floatingPlaceholder={field?.placeholder ? true : false}
-                        onChangeText={onChange}
-                        onBlur={onBlur}
-                        fieldStyle={{
-                            borderBottomWidth: 1,
-                            borderBottomColor:
-                                isSubmitted && errors?.[field.name] ? Colors.error : Colors.primary,
-                            paddingVertical: 5,
-                        }}
-                        floatingPlaceholderColor={Colors.primary}
-                        enableErrors
-                        floatOnFocus
-                        showCharCounter
-                        {...field}
-                    />
-
-                    {isSubmitted && errors?.[field.name] && (
-                        <Text error>{errors?.[field.name]?.message}</Text>
-                    )}
-                </>
-            )}
+        <TextField
+            name={fl.name}
+            floatingPlaceholder={fl?.placeholder ? true : false}
+            floatingPlaceholderColor={Colors.primary}
+            onChangeText={(e) => setFieldValue(fl.name, e)}
+            onBlur={handleBlur(fl.name)}
+            fieldStyle={{
+                borderBottomWidth: 1,
+                borderBottomColor: Colors.primary,
+                paddingVertical: 5,
+            }}
+            secureTextEntry={true}
+            // value={values[fl.name]}
+            enableErrors
+            floatOnFocus
+            showCharCounter
+            {...fl}
         />
     );
 };

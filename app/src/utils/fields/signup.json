@@ -23,7 +23,6 @@
         "type": "text",
         "defaultValue": "0102030405"
     },
-
     {   
         "name": "password1",
         "placeholder": "Mot de passe",

@@ -12,10 +12,10 @@ const FormBuilder = ({ fieldsList }) => {
 
                     switch (fl.type) {
                         case "text":
-                            render = <InputTextForm field={fl} key={"fl-" + i} />;
+                            render = <InputTextForm fl={fl} key={"fl-" + i} />;
                             break;
                         case "password":
-                            render = <InputTextPasswordForm field={fl} key={"fl-" + i} />;
+                            render = <InputTextPasswordForm fl={fl} key={"fl-" + i} />;
                             break;
 
                         default:

@@ -3,26 +3,23 @@ import { BUTTON_MARGIN } from "@constants";
 import { useAuth } from "@contexts/authContext";
 import accountFieldsJSON from "@fields/account.json";
 import FormBuilder from "@form-builder/formBuilder";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { BaseLayout } from "@layout/BaseLayout";
 import { accountValidationSchema } from "@validations";
-import React, { useState, useEffect, useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { Button, Colors, Text } from "react-native-ui-lib";
-import _ from 'lodash'
+import { Formik } from 'formik';
+import _ from 'lodash';
+import React, { useState } from "react";
+import { Button, Colors } from "react-native-ui-lib";
+
 const MyAccountScreen = () => {
 
-    const formOptions = { resolver: yupResolver(accountValidationSchema) };
+
     const auth = useAuth();
-    const methods = useForm(formOptions, {
-        defaultValues: async () => ({ firstname: 'test' })
-    })
 
     const [toastProps, setToastProps] = useState({message: "", isError: false})
     const [displayToast, setDisplayToast] = useState(false);
     
     const onSubmit = async (values) => {
-
+        console.log('values', values)
         const hasPassword = _.has(values, 'new_password' && 'new_password2')
 
         if (hasPassword) {
@@ -52,9 +49,6 @@ const MyAccountScreen = () => {
         }
     };
 
-    useEffect(() => {
-        methods.reset(auth.member);
-    }, [])
 
     return (
         <BaseLayout enablePadding={true}>
@@ -62,17 +56,30 @@ const MyAccountScreen = () => {
                 <CuToast displayToast={displayToast} setDisplayToast={setDisplayToast} toastProps={toastProps} />
             )}
 
-            <FormProvider {...methods}>
-                <FormBuilder fieldsList={accountFieldsJSON} />
-                <Button
-                    onPress={methods.handleSubmit(onSubmit)}
-                    label="Editer mon compte"
-                    size={Button.sizes.large}
-                    outlineColor={Colors.primary}
-                    style={{ marginVertical: BUTTON_MARGIN - 15 }}
-                    outline
-                />
-            </FormProvider>
+            <Formik
+                validationSchema={accountValidationSchema}
+                initialValues={{
+                    firstname: auth.member.firstname,
+                    lastname: auth.member.lastname,
+                    email: auth.member.email,
+                    phone: auth.member.phone,
+                }}
+                onSubmit={values => onSubmit(values)}
+            >
+                {({handleSubmit}) => (
+                    <>
+                        <FormBuilder fieldsList={accountFieldsJSON} />
+                        <Button
+                            onPress={handleSubmit}
+                            label="Editer mon compte"
+                            size={Button.sizes.large}
+                            outlineColor={Colors.primary}
+                            style={{ marginVertical: BUTTON_MARGIN - 15 }}
+                            outline
+                        />
+                    </>
+                )}
+            </Formik>
         </BaseLayout>
     );
 };
