@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 def get_bool_from_env(name, default_value):
     if name in os.environ:
         value = os.environ[name]
@@ -98,8 +99,8 @@ SITE_ID = 1
 ## AUTHENTIFICATION
 REST_AUTH_TOKEN_MODEL = None
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'my-app-auth'
-JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_COOKIE = 'fitness-stat-auth'
+# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 ## Overide serializer
 REST_AUTH_SERIALIZERS = {
@@ -114,8 +115,8 @@ REST_AUTH_REGISTER_SERIALIZERS = {
 DEFAULT_FROM_EMAIL = os.environ.get("MAILGUN_SENDER_EMAIL_FROM", "app@fitness-stat.com")
 
 #  DJANGO-ALLAUTH
-ACCOUNT_ADAPTER = 'app_api.adaptater.DefaultAccountAdapterCustom'  # Override activate_url
-ACCOUNT_EMAIL_REQUIRED = True # must verify email when signup
+# ACCOUNT_ADAPTER = 'app_api.adaptater.DefaultAccountAdapterCustom'  # Override activate_url
+ACCOUNT_EMAIL_REQUIRED = True  # must verify email when signup
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # Must verify account email
@@ -134,7 +135,7 @@ else:
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
     'ACCESS_TOKEN_LIFETIME': timedelta(days=10),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=15),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,
@@ -144,7 +145,7 @@ SIMPLE_JWT = {
 
 # --------- DJANGO AND DJANGO_REST CONFIG ---------
 
-PASSWORD_RESET_TIMEOUT = 86400 # email link available for 1 day
+PASSWORD_RESET_TIMEOUT = 86400  # email link available for 1 day
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -197,9 +198,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
 }
 
 # Password validation
