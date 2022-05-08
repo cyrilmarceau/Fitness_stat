@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(null);
 
-    const nonError = {
+    let nonError = {
         success: true,
         error: false,
         message: null,
@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
                 switch (err.response.status) {
                     case 400:
                         const res = err.response.data;
-                        console.log("res", res);
+  
                         if (!_.isEmpty(res.non_field_errors)) {
                             if (res.non_field_errors[0] === "E-mail is not verified.") {
                                 return {
@@ -75,6 +75,105 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const passwordChange = async (values) => {
+        setLoading(true);
+
+        try {
+            const {detail} = await API.passwordChange(values);
+            if (detail === "New password has been saved.") {
+                return nonError;
+            }
+        } catch (err) {
+            if (!_.isNil(err.response) && !_.isNil(err.response.status)) {
+                switch (err.response.status) {
+                    case 400:
+                        const res = err.response.data;
+
+                        if (!_.isEmpty(res.new_password2)) {
+                            if (res.new_password2.includes('The two password fields didn’t match.')) {
+                                return {
+                                    success: false,
+                                    error: true,
+                                    message: _i18n("passwordChange", "password_not_match"),
+                                };
+                            } else if (res.new_password2.includes('The password is too similar to the email.')) {
+                                return {
+                                    success: false,
+                                    error: true,
+                                    message: _i18n("passwordChange", "password_too_similar_to_email"),
+                                };
+                            } else if (res.new_password2.includes('This password is too short. It must contain at least 8 characters.')) {
+                                return {
+                                    success: false,
+                                    error: true,
+                                    message: _i18n("passwordChange", "password_too_short"),
+                                };
+                            }
+                        }
+                    default:
+                        return {
+                            success: false,
+                            error: true,
+                            message: _i18n("default", "request_blocked"),
+                        };
+                }
+            } else {
+                return {
+                    success: false,
+                    error: true,
+                    message: _i18n("default", "request_blocked"),
+                };
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateMe = async (values) => {
+        setLoading(true);
+
+        try {
+            const res = await API.editMe(values);
+            if (!_.isNil(res)) {
+                setMember(res);
+                return nonError
+            }
+           
+        } catch (err) {
+            if (!_.isNil(err.response) && !_.isNil(err.response.status)) {
+                switch (err.response.status) {
+                    case 400:
+                        const res = err.response.data;
+
+                         if (!_.isEmpty(res.email)) {
+                            if (res.email[0] === "Enter a valid email address.") {
+                                return {
+                                    success: false,
+                                    error: true,
+                                    message: _i18n("updateMember", "invalid_email"),
+                                };
+                            }
+                        }
+                    default:
+                        return {
+                            success: false,
+                            error: true,
+                            message: _i18n("default", "request_blocked"),
+                        };
+                }
+            } else {
+                return {
+                    success: false,
+                    error: true,
+                    message: _i18n("default", "request_blocked"),
+                };
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     const forgetPassword = async (email) => {
         setLoading(true);
 
@@ -84,12 +183,11 @@ export const AuthProvider = ({ children }) => {
                 return nonError;
             }
         } catch (err) {
-            console.log("err", err);
             if (!_.isNil(err.response) && !_.isNil(err.response.status)) {
                 switch (err.response.status) {
                     case 400:
                         const res = err.response.data;
-                        console.log("res", res);
+
                         if (!_.isEmpty(res.email)) {
                             if (res.email[0] === "Enter a valid email address.") {
                                 return {
@@ -120,7 +218,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (values) => {
         setLoading(true);
-        console.log(values);
+
         try {
             const { detail } = await API.signup(values);
             if (detail === "Verification e-mail sent.") {
@@ -128,7 +226,7 @@ export const AuthProvider = ({ children }) => {
             }
         } catch (err) {
             if (!_.isNil(err.response) && !_.isNil(err.response.status)) {
-                console.log(err.response.status);
+
                 switch (err.response.status) {
                     case 400:
                         const res = err.response.data;
@@ -152,7 +250,6 @@ export const AuthProvider = ({ children }) => {
                         }
 
                         if (!_.isEmpty(res.password1)) {
-                            console.log("res", res);
                             if (
                                 res.password1[0] ===
                                 "This password is too short. It must contain at least 8 characters."
@@ -249,7 +346,7 @@ export const AuthProvider = ({ children }) => {
     const refreshToken = async () => {
         try {
             const refreshTokenLS = await getLS("refreshToken");
-            console.log(refreshTokenLS);
+
             if (!_.isNil(refreshTokenLS)) {
                 const request = { refresh: refreshTokenLS };
 
@@ -295,8 +392,10 @@ export const AuthProvider = ({ children }) => {
                 member,
                 loading,
                 isAuth,
+                updateMe,
                 login,
                 signup,
+                passwordChange,
                 forgetPassword,
                 logout,
                 verifyToken,

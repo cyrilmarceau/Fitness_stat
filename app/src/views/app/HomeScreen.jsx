@@ -25,18 +25,14 @@ const HomeScreen = ({ navigation }) => {
     return (
         <BaseLayout enablePadding={false}>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <LayoutView>
-                    <Text h1 textD marginV-15>
-                        Hello {auth.member.firstname}
-                    </Text>
-                </LayoutView>
-
                 <View>
                     <LayoutView>
-                        <Text h5 marginT-15>
+                        <Text h5 marginV-15>
                             Mes derniers entraînements :)
                         </Text>
-                        <Button
+                       
+                        <Workouts />
+                         <Button
                             label={"Tous mes entraînements"}
                             outline
                             outlineColor={Colors.primary}
@@ -44,15 +40,24 @@ const HomeScreen = ({ navigation }) => {
                             marginV-15
                             borderRadius={9}
                         />
-                        <Workouts />
                     </LayoutView>
                 </View>
 
                 <View>
                     <LayoutView>
-                        <Text h5 marginT-15>
+                        <Text h5 marginV-15>
                             Trouve des exercices !
                         </Text>
+                       
+                    </LayoutView>
+                    <ScrollView
+                        style={{ marginLeft: 20 }}
+                        showsHorizontalScrollIndicator={false}
+                        horizontal
+                    >
+                        <Muscles muscles={muscles} />
+                    </ScrollView>
+                    <LayoutView>
                         <Button
                             label={"Tous les exercices"}
                             outline
@@ -62,14 +67,9 @@ const HomeScreen = ({ navigation }) => {
                             marginV-15
                             borderRadius={9}
                         />
+                       
                     </LayoutView>
-                    <ScrollView
-                        style={{ marginLeft: 20 }}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                    >
-                        <Muscles muscles={muscles} />
-                    </ScrollView>
+                     
                 </View>
             </ScrollView>
         </BaseLayout>

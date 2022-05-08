@@ -36,6 +36,7 @@
     "expo-blur": "~11.0.0",
     "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
+    "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "metro-react-native-babel-preset": "^0.68.0",
     "react": "17.0.1",
@@ -47,14 +48,14 @@
     "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
+    "react-native-svg": "12.1.1",
     "react-native-ui-lib": "^6.10.0",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
-    "yup": "^0.32.11",
-    "react-native-svg": "12.1.1"
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

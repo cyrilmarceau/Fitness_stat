@@ -3,23 +3,23 @@ import { Incubator } from "react-native-ui-lib";
 const { Toast } = Incubator;
 
 
-const ToastError = ({error, setError, toastProps}) => {
+const CuToast = ({displayToast, setDisplayToast, toastProps}) => {
 
   return (
       <Toast
-        visible={error}
-        preset={Incubator.ToastPresets.FAILURE}
+        visible={displayToast}
+        preset={toastProps.isError ? Incubator.ToastPresets.FAILURE : Incubator.ToastPresets.SUCCESS}
         position={"top"}
         swipeable={true}
         autoDismiss={3000}
         zIndex={2}
         containerStyle={{ top: 0 }}
         centerMessage
-        onDismiss={() => setError(false)}
-        {...toastProps}
+        onDismiss={() => setDisplayToast(false)}
+        message={toastProps.message}
           
     />
   )
 }
 
-export default ToastError
+export default CuToast

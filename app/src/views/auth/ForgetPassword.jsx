@@ -1,4 +1,4 @@
-import ToastError from "@components/ToastError";
+import CuToast from "@components/CuToast";
 import { BUTTON_MARGIN } from "@constants";
 import { useAuth } from "@contexts/authContext";
 import resetPasswordFieldJSON from "@fields/resetPassword.json";
@@ -19,28 +19,25 @@ const ForgetPassword = ({ navigation }) => {
     const methods = useForm(formOptions);
     const auth = useAuth();
 
-    const [toastProps, setToastProps] = useState({ message: "" });
-    const [error, setError] = useState(false);
+    const [toastProps, setToastProps] = useState({message: "", isError: false})
+    const [displayToast, setDisplayToast] = useState(false);
 
     const onSubmit = async (email) => {
         const { success, error, message } = await auth.forgetPassword(email);
         console.log(success, message);
         if (!success && error) {
-            console.log("here 01");
-            setError(true);
-            setToastProps({ message: message });
+            setDisplayToast(true);
+            setToastProps({ message: message, isError: true });
         } else {
-            console.log("here");
-            // navigation.goBack();
             navigation.navigate(screens.ForgetPasswordEmailSend);
         }
     };
 
     return (
         <>
-            {error && <ToastError error={error} setError={setError} toastProps={toastProps} />}
+            {displayToast && <CuToast displayToast={displayToast} setDisplayToast={setDisplayToast} toastProps={toastProps} />}
 
-            <View style={[globalS.topBarModal, {}]} />
+            <View style={globalS.topBarModal} />
 
             <BaseLayout enablePadding={true} enableSAV>
                 <FormProvider {...methods}>

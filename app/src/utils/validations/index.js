@@ -22,8 +22,21 @@ const signupValidationSchema = Yup.object().shape({
     password2: Yup.string().required("Le champ mot de passe est requis")
 });
 
+const accountValidationSchema = Yup.object().shape({
+    firstname: Yup.string().required("Le champ prénom est requis"),
+    lastname: Yup.string().required("Le champ nom est requis"),
+    email: Yup.string().required("Le champ email est requis"),
+    phone: Yup.string()
+        .required("Le champ téléphone est requis")
+        .matches(phoneRegExp, "Le numéro de téléphone n'est pas valide"),
+
+    new_password1: Yup.string().required("Le champ mot de passe est requis"),
+    
+    new_password2: Yup.string().required("Le champ de confirmation du mot de passe est requis")
+});
+
 const resetValidationSchema = Yup.object().shape({
     email: Yup.string().required("Le champ email est requis"),
 });
 
-export { loginValidationSchema, signupValidationSchema, resetValidationSchema };
+export { loginValidationSchema, signupValidationSchema, resetValidationSchema, accountValidationSchema };

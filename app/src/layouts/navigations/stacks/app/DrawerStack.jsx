@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import SettingsScreen from "@views-app/SettingsScreen";
-import MyAccountScreen from "@views-app/MyAccountScreen";
-import AboutScreen from "@views-app/AboutScreen";
+import SettingsScreen from "@views-app/menu/SettingsScreen";
+import MyAccountScreen from "@views-app/menu/MyAccountScreen";
+import AboutScreen from "@views-app/menu/AboutScreen";
 import React from "react";
 
 const DrawerStack = () => {

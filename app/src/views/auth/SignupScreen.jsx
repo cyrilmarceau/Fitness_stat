@@ -1,4 +1,4 @@
-import ToastError from "@components/ToastError";
+import CuToast from "@components/CuToast";
 import { BUTTON_MARGIN } from "@constants";
 import { useAuth } from "@contexts/authContext";
 import signupFieldsJSON from "@fields/signup.json";
@@ -17,22 +17,22 @@ export const SignupScreen = ({ navigation }) => {
     const methods = useForm(formOptions);
     const auth = useAuth();
 
-    const [toastProps, setToastProps] = useState({message: ""})
-    const [error, setError] = useState(false);
+    const [toastProps, setToastProps] = useState({message: "", isError: false})
+    const [displayToast, setDisplayToast] = useState(false);
 
     const onSubmit = async (values) => {
         const { success, error, message } = await auth.signup(values);
 
         if (!success && error) {
-            setError(true);
-            setToastProps({message: message});
+            setDisplayToast(true);
+            setToastProps({message: message, isError: true});
         }
     };
 
     return (
         <BaseLayout enablePadding={true} enableSAV>
             {error && (
-                <ToastError error={error} setError={setError} toastProps={toastProps} />
+                <CuToast displayToast={displayToast} setDisplayToast={setDisplayToast} toastProps={toastProps} />
             )}
             <Text h4 primary center>
                 C'est le moment de s'inscrire sur fitness stat :)

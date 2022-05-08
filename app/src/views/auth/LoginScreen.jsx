@@ -1,4 +1,4 @@
-import ToastError from "@components/ToastError";
+import CuToast from "@components/CuToast";
 import { BUTTON_MARGIN } from "@constants";
 import { useAuth } from "@contexts/authContext";
 import loginFieldsJSON from "@fields/login.json";
@@ -19,20 +19,22 @@ const LoginScreen = ({ navigation }) => {
     const methods = useForm(formOptions);
     const auth = useAuth();
 
-    const [toastProps, setToastProps] = useState({ message: "" });
-    const [error, setError] = useState(false);
+    const [toastProps, setToastProps] = useState({message: "", isError: false})
+    const [displayToast, setDisplayToast] = useState(false);
 
     const onSubmit = async (datas) => {
         const { success, error, message } = await auth.login(datas);
         if (!success && error) {
-            setError(true);
-            setToastProps({ message: message });
+                setDisplayToast(true);
+                setToastProps({message: message, isError: true});
         }
     };
 
     return (
         <BaseLayout enablePadding={true} enableSAV>
-            {error && <ToastError error={error} setError={setError} toastProps={toastProps} />}
+            {displayToast && (
+                <CuToast displayToast={displayToast} setDisplayToast={setDisplayToast} toastProps={toastProps} />
+            )}
 
             {!_.isNil(auth.loading) && auth.loading && (
                 <LoaderScreen

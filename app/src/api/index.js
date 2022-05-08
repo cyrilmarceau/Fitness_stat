@@ -32,6 +32,21 @@ const that = {
         });
     },
 
+    patchRoute(url, values, autenticatedRoute = true) {
+        let api = that.getAxiosInstence(autenticatedRoute)
+
+        return new Promise((resolve, reject) => {
+            api.patch(url, values)
+                .then((apiResp) => {
+                    let res = apiResp.data
+                    resolve(res)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
+    },
+
     postRoute(url, values, autenticatedRoute = false) {
         const api = that.getAxiosInstence(autenticatedRoute);
         return new Promise((resolve, reject) => {
@@ -56,6 +71,14 @@ const that = {
     signup(values) {
         if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
         return that.postRoute(`${APP_ROUTE}auth/registration/`, values, false);
+    },
+    passwordChange(values) {
+        if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
+        return that.postRoute(`${APP_ROUTE}auth/password/change/`, values, true);
+    },
+    editMe(values) {
+        if (_.isNil(values)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
+        return that.patchRoute(`${APP_ROUTE}auth/user/`, values, true);
     },
     logout() {
         return that.postRoute(`${APP_ROUTE}auth/logout/`, {}, true);

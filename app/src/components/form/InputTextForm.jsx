@@ -5,7 +5,7 @@ import _ from "lodash";
 
 const InputTextForm = ({ field }) => {
     const { TextField } = Incubator;
-    const { control, setValue } = useFormContext();
+    const { control, setValue, register } = useFormContext();
 
     useEffect(() => {
         if (_.has(field, "defaultValue")) {

@@ -1,0 +1,33 @@
+[
+    {
+        "name": "firstname",
+        "placeholder": "Prénom",
+        "type": "text"
+    },
+    {
+        "name": "lastname",
+        "placeholder": "Nom",
+        "type": "text"
+    },
+    {
+        "name": "email",
+        "placeholder": "Email",
+        "type": "text"
+    },
+    {
+        "name": "phone",
+        "placeholder": "Numéro de téléphone",
+        "type": "text"
+    },
+
+    {   
+        "name": "new_password1",
+        "placeholder": "Mot de passe",
+        "type": "password"
+    },
+    {   
+        "name": "new_password2",
+        "placeholder": "Confirmer votre mot de passe",
+        "type": "password"
+    }
+]
