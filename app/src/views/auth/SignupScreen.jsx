@@ -36,7 +36,16 @@ export const SignupScreen = ({ navigation }) => {
 
             <Formik
                     validationSchema={signupValidationSchema}
-                    onSubmit={values => onSubmit(values)}
+                onSubmit={values => onSubmit(values)}
+                initialValues={{
+                    firstname: 'Cyril',
+                    lastname: 'Marceau',
+                    email: 'cyril@gmail.com',
+                    password: 'CyrilCyril',
+                    phone: '0102030405',
+                    password1: 'CyrilCyril',
+                    password2: 'CyrilCyril',
+                }}
                 >
                     {({handleSubmit}) => (
                         <>

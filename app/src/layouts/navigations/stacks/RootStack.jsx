@@ -1,5 +1,6 @@
 import { routes } from "@layout-navigations/routes";
 import AppTab from "@layout-navigations/tabs/AppTab";
+import Constants from 'expo-constants';
 import {
     createDrawerNavigator,
     DrawerContentScrollView,
@@ -94,13 +95,20 @@ const CustomDrawerContent = (props) => {
                 </LayoutView>
 
                 <DrawerItem
-                    style={styles.logoutContainer}
                     icon={({ color, size }) => (
                         <MaterialCommunityIcons name="share-variant" size={size} color={color} />
                     )}
                     label={() => (
                         <Text h6 style={[{ color: Colors.primary }]}>
                             Partager
+                        </Text>
+                    )}
+                    onPress={logout}
+                />
+                <DrawerItem
+                    label={() => (
+                        <Text h6 style={[{ color: Colors.primary }]}>
+                            Version: {Constants.manifest.version}
                         </Text>
                     )}
                     onPress={logout}

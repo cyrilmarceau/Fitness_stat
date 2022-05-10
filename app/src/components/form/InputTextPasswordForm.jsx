@@ -21,7 +21,7 @@ const InputTextPasswordForm = ({ fl }) => {
                 paddingVertical: 5,
             }}
             secureTextEntry={true}
-            // value={values[fl.name]}
+            value={values[fl.name]}
             enableErrors
             floatOnFocus
             showCharCounter

@@ -1,4 +1,5 @@
 import CuToast from "@components/CuToast";
+import { screens } from "@layout-navigations/routes";
 import { BUTTON_MARGIN } from "@constants";
 import { useAuth } from "@contexts/authContext";
 import loginFieldsJSON from "@fields/login.json";
@@ -66,7 +67,7 @@ const LoginScreen = ({ navigation }) => {
             </Formik>
 
             <Button
-                onPress={() => navigation.navigate("ForgetPassword")}
+                onPress={() => navigation.navigate(screens.ForgetPasswordStack)}
                 label="Mot de passe oublié"
                 size={Button.sizes.large}
                 outlineColor={Colors.primary}

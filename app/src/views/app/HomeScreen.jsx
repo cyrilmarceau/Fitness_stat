@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
         const datas = await API.getMuscles();
         setMuscles(datas);
     };
-    console.log(tabBarHeight);
+
     useEffect(() => {
         getMuscles();
     }, []);
@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View>
                     <LayoutView>
-                        <Text h5 marginV-15>
+                        <Text primary h5 marginV-15>
                             Mes derniers entraînements :)
                         </Text>
                        
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
 
                 <View>
                     <LayoutView>
-                        <Text h5 marginV-15>
+                        <Text primary h5 marginV-15>
                             Trouve des exercices !
                         </Text>
                        

@@ -38,6 +38,7 @@ const ForgetPassword = ({ navigation }) => {
                 <Formik
                     validationSchema={resetValidationSchema}
                     onSubmit={values => onSubmit(values)}
+                    initialValues={{email: 'cyril@gmail.com'}}
                 >
                     {({handleSubmit}) => (
                         <>
