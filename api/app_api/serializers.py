@@ -7,7 +7,7 @@ from rest_framework import serializers
 from dj_rest_auth.serializers import UserDetailsSerializer
 from dj_rest_auth.registration.serializers import RegisterSerializer
 
-from core.models import User
+from core.models import User, Media
 
 logger = logging.getLogger(__name__)
 
@@ -31,3 +31,11 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'firstname', 'lastname', 'email', 'phone', 'is_active', 'created_at', 'updated_at',)
+
+
+# Serializers define the API representation.
+class UploadSerializer(serializers.Serializer):
+    avatar = serializers.FileField()
+
+    class Meta:
+        model = Media

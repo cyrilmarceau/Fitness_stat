@@ -14,6 +14,16 @@ const clearLS = async () => {
     console.log("Done.");
 };
 
+const getAllLS = async () => {
+  let keys = []
+  try {
+      keys = await AsyncStorage.getAllKeys()
+      return keys
+  } catch(e) {
+    // read key error
+  }
+}
+
 const getLS = async (key) => {
     try {
         const value = await AsyncStorage.getItem(`@${key}`);
@@ -57,4 +67,4 @@ const removeKeysLS = async (keys) => {
         // remove error
     }
 };
-export { _i18n, clearLS, getLS, setKeyLS, removekeyLS, removeKeysLS };
+export { _i18n, clearLS, getLS, setKeyLS, removekeyLS, removeKeysLS, getAllLS };

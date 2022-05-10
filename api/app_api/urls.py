@@ -5,7 +5,7 @@ from dj_rest_auth.views import PasswordResetConfirmView
 
 from django.urls import path, include
 
-from app_api import views
+from .views import ListMuscle, UploadViewSet
 
 urlpatterns = [
     path('auth/', include('dj_rest_auth.urls')),
@@ -18,5 +18,6 @@ urlpatterns = [
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
     path('auth/registration/account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
 
-    path('muscles/', views.ListMuscle.as_view()),
+    path('muscles/', ListMuscle.as_view()),
+    path('upload/', UploadViewSet.as_view({'post': 'create'}), name="rest_user_avatar_upload"),
 ]

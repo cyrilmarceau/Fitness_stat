@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 import ast
+import cloudinary
 
 from pathlib import Path
 from datetime import timedelta
@@ -75,7 +76,19 @@ INSTALLED_APPS = [
     # App
     'core.apps.CoreConfig',
     'app_api',
+
+    # Storage
+    'cloudinary'
 ]
+
+# --------- STORAGE CONFIG ---------
+
+cloudinary.config(
+    cloud_name=os.environ.get("CLOUD_NAME"),
+    api_key=os.environ.get("API_KEY"),
+    api_secret=os.environ.get("API_SECRET"),
+    secure=True
+)
 
 # --------- EMAIL CONFIG ---------
 
@@ -100,7 +113,7 @@ SITE_ID = 1
 REST_AUTH_TOKEN_MODEL = None
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = 'fitness-stat-auth'
-# JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
+JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 
 ## Overide serializer
 REST_AUTH_SERIALIZERS = {
@@ -198,9 +211,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ),
-    # 'DEFAULT_PERMISSION_CLASSES': [
-    #     'rest_framework.permissions.IsAuthenticated',
-    # ]
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticated',
+    ]
 }
 
 # Password validation

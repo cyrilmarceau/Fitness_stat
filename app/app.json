@@ -10,6 +10,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Fitness stat a besoin d'accéder à vos photos afin de charger une image pour votre profil."
+        }
+      ]
+    ],
     "updates": {
       "fallbackToCacheTimeout": 0
     },

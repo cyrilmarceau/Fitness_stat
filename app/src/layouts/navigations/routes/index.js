@@ -20,9 +20,10 @@ export const screens = {
     WorkoutStack: "WorkoutStack",
     MealStack: "MealStack",
     DrawerStack: "DrawerStack",
-    AccountScreen: "AccountScreen",
-    SettingsScreen: "SettingsScreen",
-    AboutScreen: "AboutScreen",
+    ProfilPicture: "ProfilPictureScreen",
+    Account: "AccountScreen",
+    Settings: "SettingsScreen",
+    About: "AboutScreen",
 };
 
 export const routes = [
@@ -96,8 +97,14 @@ export const routes = [
         showInDrawer: false,
     },
     {
-        name: screens.AccountScreen,
-        focusedRoute: screens.AccountScreen,
+        name: screens.ProfilPicture,
+        focusedRoute: screens.ProfilPicture,
+        showInTab: false,
+        showInDrawer: false
+    },
+    {
+        name: screens.Account,
+        focusedRoute: screens.Account,
         title: "Profil",
         showInTab: false,
         showInDrawer: true,
@@ -106,16 +113,16 @@ export const routes = [
         ),
     },
     {
-        name: screens.SettingsScreen,
-        focusedRoute: screens.SettingsScreen,
+        name: screens.Settings,
+        focusedRoute: screens.Settings,
         title: "Paramètres",
         showInTab: false,
         showInDrawer: true,
         icon: (color, size) => <Ionicons name="ios-settings-outline" size={size} color={color} />,
     },
     {
-        name: screens.AboutScreen,
-        focusedRoute: screens.AboutScreen,
+        name: screens.About,
+        focusedRoute: screens.About,
         title: "A propos",
         showInTab: false,
         showInDrawer: true,

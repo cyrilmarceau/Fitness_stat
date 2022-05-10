@@ -1,4 +1,4 @@
-import { routes } from "@layout-navigations/routes";
+import { routes, screens } from "@layout-navigations/routes";
 import AppTab from "@layout-navigations/tabs/AppTab";
 import Constants from 'expo-constants';
 import {
@@ -13,7 +13,7 @@ import { StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Spacer from "@components/Spacer";
 import { LayoutView } from "@layout/BaseLayout";
-
+import CuBottomSheet from '@components/CuBottomSheet';
 const CustomDrawerContent = (props) => {
     // const currentRouteName = props.nav()?.getCurrentRoute().name; // get focused route name
     const auth = useAuth();
@@ -25,6 +25,7 @@ const CustomDrawerContent = (props) => {
     return (
         <>
             <DrawerContentScrollView {...props}>
+                
                 <View marginL-10 marginB-25>
                     <Avatar
                         size={80}
@@ -63,6 +64,9 @@ const CustomDrawerContent = (props) => {
                                 />
                             );
                         }}
+                        onPress={() => props.navigation.navigate("DrawerStack", {
+                                        screen: screens.ProfilPicture,
+                                    })}
                     />
                 </View>
 

@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 
 import { AuthProvider } from "@contexts/authContext";
+import Entypo from '@expo/vector-icons/Entypo';
 import {
     Montserrat_400Regular,
     Montserrat_500Medium,
@@ -9,12 +10,14 @@ import {
     useFonts,
 } from "@expo-google-fonts/montserrat";
 import DispatcherNav from "@layout-navigations/DispatcherNav";
-import AppLoading from "expo-app-loading";
-import React from "react";
+import * as SplashScreen from 'expo-splash-screen';
+import React, {useCallback, useEffect, useState} from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Colors, Typography } from "react-native-ui-lib";
+import { Colors, Typography, View, Text } from "react-native-ui-lib";
 
 export default function App() {
+    const [appIsReady, setAppIsReady] = useState(false);
+
     let [fontsLoaded] = useFonts({
         Montserrat_400Regular,
         Montserrat_500Medium,
@@ -42,15 +45,55 @@ export default function App() {
         h6: { fontSize: 20, fontWeight: "400" },
     });
 
-    if (!fontsLoaded) {
-        return <AppLoading />;
+    useEffect(() => {
+        async function prepare() {
+            try {
+                await SplashScreen.preventAutoHideAsync();
+                
+                if (fontsLoaded === true) {
+                    setAppIsReady(true);
+
+                    await SplashScreen.hideAsync();
+                }
+
+                // Simulate splash screen
+                // await new Promise(resolve => setTimeout(resolve, 2000));
+            } catch (e) {
+                console.warn(e);
+            } finally {
+                setAppIsReady(true);
+            }
+        }
+
+        prepare();
+    }, [fontsLoaded]);
+
+    const onLayoutRootView = useCallback(async () => {
+        if (appIsReady)
+            await SplashScreen.hideAsync();
+    }, [appIsReady]);
+
+    if (!appIsReady) {
+        return null;
     }
 
     return (
-        <AuthProvider>
-            <SafeAreaProvider>
-                <DispatcherNav />
-            </SafeAreaProvider>
-        </AuthProvider>
+        <>
+            {appIsReady === false ? (
+                <View
+                     style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+                     onLayout={onLayoutRootView}>
+                     <Text>SplashScreen Demo! 👋</Text>
+                     <Entypo name="rocket" size={30} />
+                 </View>  
+            ) : (
+                 <AuthProvider>
+                    <SafeAreaProvider>
+                        <DispatcherNav />
+                    </SafeAreaProvider>
+                </AuthProvider>
+             )} 
+        </>
+        
     );
 }

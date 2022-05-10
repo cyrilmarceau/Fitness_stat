@@ -2,27 +2,56 @@ import os
 import json
 import logging
 
-from api import settings
-
 from django.db import models
 from django.dispatch import receiver
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 
 from allauth.account.signals import user_signed_up, password_changed, password_reset, \
     email_confirmed
 
+from api import settings
+
 from public_api.utils import send_mail
 
 logger = logging.getLogger(__name__)
-
 
 with open(os.path.join(settings.BASE_DIR, '../common/enum/muscles.json')) as file:
     muscles = json.load(file)
 
 MUSCLES_CHOICES = [(m['key'], m['value']) for m in muscles]
+
+
+def media_file_path(instance, filename):
+    """Generate file path for new image"""
+    ext = filename.split('.')[-1]
+    filename = str(instance.uuid) + '.' + ext
+    return os.path.join('uploads/medias/', filename)
+
+
+class Media(models.Model):
+    """database model for medias"""
+
+    uuid = models.UUIDField()
+    file = models.FileField(upload_to=media_file_path)
+    original_file_name = models.CharField(max_length=255)
+    mime_type = models.CharField(max_length=255)
+    file_size = models.IntegerField(default=0)
+    media_object_id = models.PositiveIntegerField()
+    media_content_type = models.ForeignKey(ContentType, on_delete=models.PROTECT)
+    media = GenericForeignKey('media_content_type', 'media_object_id')
+    usage = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Media'
+        verbose_name_plural = 'Medias'
+        ordering = ['updated_at']
 
 
 class UserManager(BaseUserManager):
@@ -62,6 +91,11 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    media = GenericRelation(
+        Media,
+        'media_object_id',
+        'media_content_type',
+    )
 
     objects = UserManager()
 

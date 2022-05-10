@@ -1,10 +1,11 @@
 import { useAuth } from "@contexts/authContext";
-import { removeKeysLS } from "@helpers";
+import { removeKeysLS, clearLS, getAllLS } from "@helpers";
 import AuthStack from "@layout-navigations/stacks/AuthStack";
 import RootStack from "@layout-navigations/stacks/RootStack";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { createRef, useEffect, useState } from "react";
 import { Incubator } from "react-native-ui-lib";
+import axios from "axios";
 const { Toast } = Incubator;
 
 const DispatcherNav = () => {
@@ -35,9 +36,11 @@ const DispatcherNav = () => {
         }
     };
 
-    // useEffect(() => {
-    //     clearLS();
-    // }, []);
+    useEffect( () => {
+        // clearLS();
+        // axios.defaults.headers.common["Authorization"] = ''
+        // console.log(axios.defaults.headers.common["Authorization"]);
+    }, []);
 
     useEffect(async () => {
         const isInvalidOrExpired = await verifyTokenInvalidOrExpired();
