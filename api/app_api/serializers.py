@@ -35,7 +35,7 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
 
 # Serializers define the API representation.
 class UploadSerializer(serializers.Serializer):
-    avatar = serializers.FileField()
+    # avatar = serializers.FileField()
 
     class Meta:
         model = Media
