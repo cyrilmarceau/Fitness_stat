@@ -14,6 +14,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Spacer from "@components/Spacer";
 import { LayoutView } from "@layout/BaseLayout";
 import CuBottomSheet from '@components/CuBottomSheet';
+import UserDrawer from "@components/UserDrawer";
+
 const CustomDrawerContent = (props) => {
     // const currentRouteName = props.nav()?.getCurrentRoute().name; // get focused route name
     const auth = useAuth();
@@ -27,47 +29,7 @@ const CustomDrawerContent = (props) => {
             <DrawerContentScrollView {...props}>
                 
                 <View marginL-10 marginB-25>
-                    <Avatar
-                        size={80}
-                        source={{
-                            uri: "https://lh3.googleusercontent.com/-cw77lUnOvmI/AAAAAAAAAAI/AAAAAAAAAAA/WMNck32dKbc/s181-c/104220521160525129167.jpg",
-                        }}
-                    />
-                    <View
-                        style={{
-                            marginTop: 10,
-                            flexDirection: "row",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Text primary marginL-10 h5>
-                            {auth.member?.firstname}{" "}
-                        </Text>
-                        <Text primary h5>
-                            {auth.member?.lastname}
-                        </Text>
-                    </View>
-                    <Button
-                        animateTo="left"
-                        marginT-20
-                        marginR-40
-                        borderRadius={5}
-                        label={"Charger une photo"}
-                        backgroundColor={Colors.secondary}
-                        iconSource={(iconStyle) => {
-                            return (
-                                <MaterialCommunityIcons
-                                    style={{ marginRight: iconStyle[0].marginRight }}
-                                    name="upload-outline"
-                                    size={24}
-                                    color={iconStyle[0].tintColor}
-                                />
-                            );
-                        }}
-                        onPress={() => props.navigation.navigate("DrawerStack", {
-                                        screen: screens.ProfilPicture,
-                                    })}
-                    />
+                    <UserDrawer />
                 </View>
 
                 {routes
@@ -107,7 +69,6 @@ const CustomDrawerContent = (props) => {
                             Partager
                         </Text>
                     )}
-                    onPress={logout}
                 />
                 <DrawerItem
                     label={() => (

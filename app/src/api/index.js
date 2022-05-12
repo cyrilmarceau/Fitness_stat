@@ -1,5 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
+import { Platform } from "react-native";
 
 // Ecole: http://192.168.20.214:9010/
 const PUBLIC_API_URL = "http://192.168.1.29:9010/";
@@ -8,8 +9,8 @@ const APP_ROUTE = "api/app/";
 const that = {
     getAxiosInstence(autenticatedRoute = true) {
         let reqHeaders = {
-            "Content-type": "Application/json",
-            "Accept": "Application/json",
+            // "Content-type": "Application/json",
+            // "Accept": "Application/json",
         };
 
         return axios.create({
@@ -90,6 +91,42 @@ const that = {
     refreshToken(refreshToken) {
         if (_.isNil(refreshToken)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
         return that.postRoute(`${APP_ROUTE}auth/token/refresh/`, refreshToken, false);
+    },
+    uploadAvatar(file) {
+        if (_.isNil(file)) return Promise.reject(new Error("ERR_EMPTY_PARAM"));
+        let api = that.getAxiosInstence(true)
+        let data = new FormData();
+
+        data.append('avatar', {
+            name: 'imageCheck',
+            type: 'image/jpeg',
+            uri: Platform.OS === 'ios' ? file.replace('file://', '') : file,
+        });
+
+        data = data['_parts'][0]
+        
+        data['avatar'] = data
+        console.log(data)
+
+        
+        return new Promise((resolve, reject) => {
+            api.post(
+                `${APP_ROUTE}upload/`,
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
+                    },
+                }
+            )
+                .then((apiResp) => {
+                    let res = apiResp.data
+                    resolve(res)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
     },
     me() {
         return that.getRoute(`${APP_ROUTE}auth/user/`, {}, true);

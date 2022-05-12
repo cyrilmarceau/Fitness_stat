@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 
 import { AuthProvider } from "@contexts/authContext";
+import { AppProvider } from "@contexts/appContext";
 import Entypo from '@expo/vector-icons/Entypo';
 import {
     Montserrat_400Regular,
@@ -87,10 +88,13 @@ export default function App() {
                      <Entypo name="rocket" size={30} />
                  </View>  
             ) : (
-                 <AuthProvider>
-                    <SafeAreaProvider>
-                        <DispatcherNav />
-                    </SafeAreaProvider>
+                    <AuthProvider>
+                        <AppProvider>
+                            <SafeAreaProvider>
+                                <DispatcherNav />
+                            </SafeAreaProvider>
+                        </AppProvider>
+                    
                 </AuthProvider>
              )} 
         </>

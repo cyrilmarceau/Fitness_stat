@@ -30,9 +30,9 @@ const accountValidationSchema = Yup.object().shape({
         .required("Le champ téléphone est requis")
         .matches(phoneRegExp, "Le numéro de téléphone n'est pas valide"),
 
-    new_password1: Yup.string().required("Le champ mot de passe est requis"),
+    new_password1: Yup.string(),
     
-    new_password2: Yup.string().required("Le champ de confirmation du mot de passe est requis")
+    new_password2: Yup.string()
 });
 
 const resetValidationSchema = Yup.object().shape({

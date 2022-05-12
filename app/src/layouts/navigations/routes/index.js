@@ -99,6 +99,7 @@ export const routes = [
     {
         name: screens.ProfilPicture,
         focusedRoute: screens.ProfilPicture,
+        title: "",
         showInTab: false,
         showInDrawer: false
     },
