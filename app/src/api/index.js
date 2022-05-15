@@ -103,20 +103,14 @@ const that = {
             uri: Platform.OS === 'ios' ? file.replace('file://', '') : file,
         });
 
-        data = data['_parts'][0]
-        
-        data['avatar'] = data
-        console.log(data)
-
         
         return new Promise((resolve, reject) => {
             api.post(
                 `${APP_ROUTE}upload/`,
                 data,
                 {
-                    headers: {
-                        'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
-                    },
+                    'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
+
                 }
             )
                 .then((apiResp) => {

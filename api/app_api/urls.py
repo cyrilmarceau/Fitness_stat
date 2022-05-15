@@ -19,5 +19,5 @@ urlpatterns = [
     path('auth/registration/account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
 
     path('muscles/', ListMuscle.as_view()),
-    path('upload/', UploadViewSet.as_view({'post': 'create'}), name="rest_user_avatar_upload"),
+    path('upload/', UploadViewSet.as_view()),
 ]

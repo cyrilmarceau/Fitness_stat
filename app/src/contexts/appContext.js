@@ -13,13 +13,8 @@ export const AppProvider = ({ children }) => {
         try {
             const res = await API.uploadAvatar(file);
             console.log('res', res)
-            // if (detail === "Successfully logged out.") {
-            //     await removeKeysLS(["accessToken", "refreshToken"]);
-            //     setIsAuth(false);
-            //     return nonError;
-            // }
         } catch (error) {
-            console.log('error upload', error.response.data)
+            console.log('error upload', error)
         }
     };
 

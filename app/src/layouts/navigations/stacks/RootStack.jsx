@@ -39,7 +39,6 @@ const CustomDrawerContent = (props) => {
                             <DrawerItem
                                 key={route.name}
                                 icon={({ color, size }) => {
-                                    console.log(color, size);
                                     return route.icon(color, size);
                                 }}
                                 label={() => (
@@ -76,7 +75,6 @@ const CustomDrawerContent = (props) => {
                             Version: {Constants.manifest.version}
                         </Text>
                     )}
-                    onPress={logout}
                 />
             </DrawerContentScrollView>
 

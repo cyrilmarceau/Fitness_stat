@@ -20,7 +20,6 @@ export const screens = {
     WorkoutStack: "WorkoutStack",
     MealStack: "MealStack",
     DrawerStack: "DrawerStack",
-    ProfilPicture: "ProfilPictureScreen",
     Account: "AccountScreen",
     Settings: "SettingsScreen",
     About: "AboutScreen",
@@ -95,13 +94,6 @@ export const routes = [
         focusedRoute: screens.DrawerStack,
         showInTab: false,
         showInDrawer: false,
-    },
-    {
-        name: screens.ProfilPicture,
-        focusedRoute: screens.ProfilPicture,
-        title: "",
-        showInTab: false,
-        showInDrawer: false
     },
     {
         name: screens.Account,

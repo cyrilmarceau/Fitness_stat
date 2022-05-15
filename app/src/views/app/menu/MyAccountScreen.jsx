@@ -19,12 +19,27 @@ const MyAccountScreen = () => {
     const [displayToast, setDisplayToast] = useState(false);
     
     const onSubmit = async (values) => {
-        console.log('values', values)
-        const hasPassword = _.has(values, 'new_password' && 'new_password2')
+
+        const memberFields = _.omit(values, ['new_password1', 'new_password2'])
+        
+        if (_.isEmpty(values.new_password2) || _.isEmpty(values.new_password2)) {
+            console.log('password empty');
+        }
+        const { success, error, message } = await auth.updateMe(memberFields)
+        
+        if (!success && error) {
+                setDisplayToast(true);
+                setToastProps({message: message, isError: true});
+        } else {
+            setDisplayToast(true);
+            setToastProps({message: "Votre compte a été modifié avec succès", isError: false });
+        }
+
+        const hasPassword = _.has(values, 'new_password' && 'new_password2');
 
         if (hasPassword) {
             const passwordFields = _.pick(values, ['new_password1', 'new_password2'])
-            console.log(passwordFields)
+
             const { success, error, message } = await auth.passwordChange(passwordFields)
 
             if (!success && error) {
@@ -34,18 +49,6 @@ const MyAccountScreen = () => {
                 setDisplayToast(true);
                 setToastProps({message: "Votre mot de passe a été modifié avec succès", isError: false });
             }
-        }
-        
-        const memberFields = _.omit(values, ['new_password1', 'new_password2'])
-
-        const { success, error, message } = await auth.updateMe(memberFields)
-        
-        if (!success && error) {
-                setDisplayToast(true);
-                setToastProps({message: message, isError: true});
-        } else {
-            setDisplayToast(true);
-            setToastProps({message: "Votre compte a été modifié avec succès", isError: false });
         }
     };
 

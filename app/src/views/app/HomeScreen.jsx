@@ -45,13 +45,13 @@ const HomeScreen = ({ navigation }) => {
 
                 <View>
                     <LayoutView>
-                        <Text primary h5 marginV-15>
+                        <Text primary h5 marginT-15>
                             Trouve des exercices !
                         </Text>
                        
                     </LayoutView>
                     <ScrollView
-                        style={{ marginLeft: 20 }}
+                        style={{ paddingLeft: 20, paddingVertical: 15 }}
                         showsHorizontalScrollIndicator={false}
                         horizontal
                     >
@@ -64,7 +64,6 @@ const HomeScreen = ({ navigation }) => {
                             outlineColor={Colors.primary}
                             outlineWidth={2}
                             avoidMinWidth
-                            marginV-15
                             borderRadius={9}
                         />
                        

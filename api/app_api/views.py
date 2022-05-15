@@ -26,16 +26,16 @@ class ListMuscle(APIView):
 
 
 # ViewSets define the view behavior.
-class UploadViewSet(ViewSet):
+class UploadViewSet(APIView):
     parser_classes = [MultiPartParser]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
-    def create(self, request, format=None):
+    def post(self, request, format=None):
         logger.error('HERE !!! {}'.format(request.FILES))
         logger.error('HERE !!! 01 {}'.format(request.data))
-        return Response({'key': 'ok'})
-        # serializer = UploadSerializer(data=request.data)
 
+        serializer = UploadSerializer(data=request.data)
+        return Response({'key': 'ok'})
         # if serializer.is_valid():
         #     # avatar = request.FILES["avatar"]
         #     avatar = request.data.get('avatar')

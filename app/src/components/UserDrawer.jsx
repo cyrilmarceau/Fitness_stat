@@ -4,12 +4,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from 'expo-image-picker';
 import React, { useState } from 'react';
 import { Avatar, Button, Colors, Text, View } from "react-native-ui-lib";
-import axios from "axios";
-    
+
 const UserDrawer = () => {
     const [image, setImage] = useState(null);
     const app = useApp()
     const auth = useAuth();
+
     
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -21,7 +21,6 @@ const UserDrawer = () => {
         });
 
         if (!result.cancelled) {
-            setImage(result.uri);
             if (result.uri) {
                 const test = await app.uploadAvatar(result.uri)
                 console.log('test', test)

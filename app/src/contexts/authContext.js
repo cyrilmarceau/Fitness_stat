@@ -26,7 +26,6 @@ export const AuthProvider = ({ children }) => {
             if (!_.isNil(res.access_token)) {
                 setKeyLS("accessToken", res.access_token);
                 setKeyLS("refreshToken", res.refresh_token);
-                console.log('res', res.user)
                 setMember(res.user);
                 setIsAuth(true);
 

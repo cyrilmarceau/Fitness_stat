@@ -6,7 +6,6 @@ const InputTextForm = ({ fl, secureTextEntry = false }) => {
     const { TextField } = Incubator;
 
     const { setFieldValue, handleBlur, values, errors } = useFormikContext();
-    console.log('values', errors)
     return (
         <>
             <TextField

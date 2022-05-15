@@ -95,6 +95,7 @@ class User(AbstractBaseUser):
         Media,
         'media_object_id',
         'media_content_type',
+        related_query_name='avatar'
     )
 
     objects = UserManager()
