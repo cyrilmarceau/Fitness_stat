@@ -6,6 +6,7 @@
     "test": "jest",
     "start": "expo start",
     "android": "expo start --android",
+    "development:ios": "eas build --profile development --platform ios",
     "device:create": "eas device:create",
     "ios": "expo start --ios",
     "web": "expo start --web",

@@ -13,4 +13,6 @@ class Command(BaseCommand):
     help = "Insert estimate model for json"
 
     def handle(self, *args, **options):
-        pass
+        with open(os.path.join(settings.BASE_DIR, '../common/enum/muscles.json')) as file:
+            muscles = json.load(file)
+            logger.debug('MUSCLE {}'.format(muscles))
